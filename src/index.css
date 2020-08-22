@@ -1,0 +1,8 @@
+body{
+    --primary: #333;
+    --type-first: Helvetica, Arial, sans-serif;
+    --type-second: 'Spectral', Georgia;
+
+    font-family: var(--type-first);
+    color: var(--primary);
+}
