@@ -5,4 +5,12 @@ body{
 
     font-family: var(--type-first);
     color: var(--primary);
+
+    padding-top: 4rem;
+}
+
+a{
+    text-decoration: none;
+    color: var(---primary);
+    padding: .5rem;
 }
