@@ -2,15 +2,25 @@ body{
     --primary: #333;
     --type-first: Helvetica, Arial, sans-serif;
     --type-second: 'Spectral', Georgia;
+    --body-padding-top: 4rem;
 
     font-family: var(--type-first);
     color: var(--primary);
 
-    padding-top: 4rem;
-}
+    padding-top: var(--body-padding-top);
+}   
 
 a{
     text-decoration: none;
     color: var(---primary);
     padding: .5rem;
 }
+
+/*Para posicionar o footer no final da page*/
+#root{
+    display: flex;
+    flex-direction: column;
+    /*Para sempre ocupar a toda a tela, tirando o padding do top*/
+    min-height: calc(100vh - var(--body-padding-top));
+  
+  }
