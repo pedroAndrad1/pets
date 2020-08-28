@@ -33,7 +33,7 @@ const Header = () => {
         <HeaderContainer>
             <Nav>
                 <Link to='/' arial-label='Link para a home'><img src={logo} alt='Logo da Pets' /></Link>
-                <Link to='' className='login'>Login / Criar</Link>
+                <Link to='/login' className='login'>Login / Criar</Link>
             </Nav>
         </HeaderContainer>
     )

@@ -1,12 +1,11 @@
 import React from 'react';
-import PageRoot from '../components/PageRoot';
 
 function Home() {
   return (
     <>
-      <PageRoot>
-        <div>Pets</div>
-      </PageRoot>
+
+      <div>Pets</div>
+
     </>
   );
 }
