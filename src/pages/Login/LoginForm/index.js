@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
+import useForm from '../../../Hooks/useForm';
 
 const LoginForm = () => {
 
-    const [user, setUser] = useState('');
-    const [password, setPassword] = useState('');
+    
+    const userName = useForm();
+    const password = useForm();
 
     return (
         <section>
@@ -15,12 +17,12 @@ const LoginForm = () => {
                     label='Usuário'
                     name='user'
                     type='text'
-                    value={user} onChange={({ target }) => setUser(target.value)} />
+                    {...userName} />
                 <Input
                     label='Senha'
                     name='password'
                     type='password'
-                    value={password} onChange={({ target }) => setPassword(target.value)} />
+                    {...password}/>
                 <Button >Entrar</Button>
             </form>
         </section>
