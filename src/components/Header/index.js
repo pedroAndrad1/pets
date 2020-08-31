@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/logo.svg';
 import Link from 'react-router-dom/Link';
 import './Header.css';
+import { UserContext } from '../../UserContext';
 
 const HeaderContainer = styled.header`
     background-color: #fff;
@@ -29,11 +30,21 @@ const Nav = styled.nav`
 
 const Header = () => {
 
+    const { data, userLogout } = useContext(UserContext);
+
+
     return (
         <HeaderContainer>
             <Nav>
                 <Link to='/' arial-label='Link para a home'><img src={logo} alt='Logo da Pets' /></Link>
-                <Link to='/login' className='login'>Login / Criar</Link>
+                <button onClick = {() => userLogout()}> sair </button>
+                {
+                    data ?
+                        <Link to='/conta' className='login'>{data.nome}</Link>
+                        :
+                        <Link to='/login' className='login'>Login / Criar</Link>
+                }
+
             </Nav>
         </HeaderContainer>
     )
