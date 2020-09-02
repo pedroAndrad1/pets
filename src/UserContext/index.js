@@ -16,7 +16,7 @@ export const UserStorage = ({ children }) => {
 
     useEffect(() => autoLogin(), [] );
 
-
+    //Realiza o login no carregamento, caso tenha o token
     const autoLogin = () => {
         const token = window.localStorage.getItem('token');
 
@@ -32,14 +32,17 @@ export const UserStorage = ({ children }) => {
                 .finally( () => setLoading(false) )
         }
     }
-
+    //Login por meio de token
     const tokenLogin = token => {
 
         setError(null);
         setLoading(true);
 
         API.GET_USER(token)
-            .then(res => setData(res))
+            .then(res => {
+                setData(res);
+                setLogin(true)
+            })
             .catch(e => {
                 setError(e);
                 console.log(error.message)
@@ -47,6 +50,7 @@ export const UserStorage = ({ children }) => {
             .finally( () => setLoading(false) )
     }
 
+    //Login por meio de userName e password
     const userLogin = (userName, password) => {
 
         setError(null);
@@ -59,6 +63,7 @@ export const UserStorage = ({ children }) => {
             })
             .then(res => {
                 setData(res);
+                setLogin(true)
             })
             .catch(e => {
                 setError(e);
@@ -76,7 +81,7 @@ export const UserStorage = ({ children }) => {
     }
 
     return (
-        <UserContext.Provider value={{ userLogin, userLogout, data }}>
+        <UserContext.Provider value={{ userLogin, userLogout, data, login, error, loading }}>
             {children}
         </UserContext.Provider>
     )

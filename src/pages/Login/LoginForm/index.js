@@ -1,22 +1,26 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 import useForm from '../../../hooks/useForm';
-import API from '../../../API';
 import { UserContext } from '../../../UserContext';
+import { useHistory } from 'react-router-dom';
 
 const LoginForm = () => {
-    
-    const {userLogin} = useContext(UserContext);
+
+    const { userLogin, loading, login } = useContext(UserContext);
+    const history = useHistory();
+
+    //Se o usario ja estiver logado, redirecionar para a page conta
+    if (login) history.push('/conta')
 
     const userName = useForm();
     const password = useForm();
 
-    const handleSubmit = (event) =>{
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         //Validando form
-        if(userName.validate() && password.validate()) 
+        if (userName.validate() && password.validate())
             userLogin(userName.value, password.value);
     }
 
@@ -34,7 +38,12 @@ const LoginForm = () => {
                     name='password'
                     type='password'
                     {...password} />
-                <Button >Entrar</Button>
+                {
+                    loading ?
+                        <Button disabled>Carregando</Button>
+                        :
+                        <Button>Entrar </Button>
+                }
             </form>
         </section>
     )
