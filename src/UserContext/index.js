@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 import API from '../API'
 
 //Context para ter acesso aos dados do user em qualquer ponto da aplicacao.
@@ -13,27 +13,8 @@ export const UserStorage = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-
-    useEffect(() => autoLogin(), [] );
-
-    //Realiza o login no carregamento, caso tenha o token
-    const autoLogin = () => {
-        const token = window.localStorage.getItem('token');
-
-        if (token) {
-
-            setError(null);
-            setLoading(true);
-
-            API.TOKEN_VALIDATE_POST(token)
-                .then(res => {
-                    res ? tokenLogin(token) : userLogout()
-                })
-                .finally( () => setLoading(false) )
-        }
-    }
     //Login por meio de token
-    const tokenLogin = token => {
+    const tokenLogin = useCallback(token => {
 
         setError(null);
         setLoading(true);
@@ -45,10 +26,33 @@ export const UserStorage = ({ children }) => {
             })
             .catch(e => {
                 setError(e);
-                console.log(error.message)
             })
-            .finally( () => setLoading(false) )
-    }
+            .finally(() => setLoading(false))
+    }, [])
+
+    //Realiza o login no carregamento, caso tenha o token
+    const autoLogin = useCallback(
+        () => {
+            const token = window.localStorage.getItem('token');
+
+            if (token) {
+
+                setError(null);
+                setLoading(true);
+
+                API.TOKEN_VALIDATE_POST(token)
+                    .then(res => {
+                        res ? tokenLogin(token) : userLogout()
+                    })
+                    .finally(() => setLoading(false))
+            }
+        }, [tokenLogin]
+    )
+
+
+
+    useEffect(() => autoLogin(), [autoLogin]);
+
 
     //Login por meio de userName e password
     const userLogin = (userName, password) => {
@@ -69,7 +73,7 @@ export const UserStorage = ({ children }) => {
                 setError(e);
                 console.log(error.message)
             })
-            .finally( () => setLoading(false) )
+            .finally(() => setLoading(false))
     }
 
     const userLogout = () => {
