@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/logo.svg';
 import Link from 'react-router-dom/Link';
-import './Header.css';
 import { UserContext } from '../../UserContext';
+import { HeaderLink } from './styles';
 
 const HeaderContainer = styled.header`
     background-color: #fff;
@@ -40,9 +40,9 @@ const Header = () => {
                 <button onClick = {() => userLogout()}> sair </button>
                 {
                     data ?
-                        <Link to='/conta' className='login'>{data.nome}</Link>
+                        <HeaderLink to='/conta'>{data.nome}</HeaderLink>
                         :
-                        <Link to='/login' className='login'>Login / Criar</Link>
+                        <HeaderLink to='/login'>Login / Criar</HeaderLink>
                 }
 
             </Nav>

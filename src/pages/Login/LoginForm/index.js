@@ -4,6 +4,8 @@ import Input from '../../../components/Input';
 import useForm from '../../../hooks/useForm';
 import { UserContext } from '../../../UserContext';
 import { useHistory } from 'react-router-dom';
+import {PerdeuSenha } from './styles';
+import Title from '../../../components/Title';
 
 const LoginForm = () => {
 
@@ -25,9 +27,9 @@ const LoginForm = () => {
     }
 
     return (
-        <section>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
+        <section className='animeLeft'>
+            <Title>Login</Title>
+            <form onSubmit={handleSubmit} style={{marginBottom: '2rem'}}>
                 <Input
                     label='Usuário'
                     name='user'
@@ -45,6 +47,7 @@ const LoginForm = () => {
                         <Button>Entrar </Button>
                 }
             </form>
+            <PerdeuSenha to='login/recuperar-senha'>Perdeu a Senha?</PerdeuSenha>
         </section>
     )
 }
