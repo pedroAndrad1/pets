@@ -5,7 +5,7 @@ import API from '../API'
 
 export const UserContext = createContext();
 
-//Todos os components emglobados por esse context terao acesso aos seus atributos e metodos
+//Todos os components englobados por esse context terao acesso aos seus atributos e metodos
 export const UserStorage = ({ children }) => {
 
     const [data, setData] = useState();
@@ -24,9 +24,7 @@ export const UserStorage = ({ children }) => {
                 setData(res);
                 setLogin(true)
             })
-            .catch(e => {
-                setError(e);
-            })
+           
             .finally(() => setLoading(false))
     }, [])
 
@@ -70,8 +68,7 @@ export const UserStorage = ({ children }) => {
                 setLogin(true)
             })
             .catch(e => {
-                setError(e);
-                console.log(error.message)
+                setError(e.message);
             })
             .finally(() => setLoading(false))
     }

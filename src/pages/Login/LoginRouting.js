@@ -4,6 +4,7 @@ import LoginForm from './LoginForm';
 import LoginCreate from './LoginCreate';
 import LoginPasswordLost from './LoginPasswordLost';
 import LoginPasswordReset from './LoginPasswordReset';
+import LoginTemplate from '../../components/LoginTemplate';
 
 //Esse e um componente de roteamento das paginas de Login. Para fazer um nested routing.
 
@@ -12,14 +13,14 @@ const LoginRouting = () => {
       Ou seja, quando clicar nos botoes, o roteamento nao vai funcionar. Apenas para o home.  
     */
     return (
-        <>
+        <LoginTemplate>
             <Switch>
                 <Route path='/login' exact component={LoginForm} />
                 <Route path='/login/cadastro' component={LoginCreate} />
                 <Route path='/login/recuperar-senha' component={LoginPasswordLost} />
                 <Route path='/login/reset' component={LoginPasswordReset} />
             </Switch>
-        </>
+        </LoginTemplate>
     )
 }
 export default LoginRouting;

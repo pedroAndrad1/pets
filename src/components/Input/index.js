@@ -9,6 +9,7 @@ const StyledInput = styled.input`
     border-radius: .4rem;
     background: #eee;
     transition: .3s;
+    width: 90%;
 
     &:hover, &:focus{
         outline: none;

@@ -6,10 +6,11 @@ import { UserContext } from '../../../UserContext';
 import { useHistory } from 'react-router-dom';
 import { PerdeuSenha, SubTitle, Cadastro } from './styles';
 import Title from '../../../components/Title';
+import Error from '../../../utils/Error';
 
 const LoginForm = () => {
 
-    const { userLogin, loading, login } = useContext(UserContext);
+    const { userLogin, loading, login, error } = useContext(UserContext);
     const history = useHistory();
 
     //Se o usario ja estiver logado, redirecionar para a page conta
@@ -47,6 +48,10 @@ const LoginForm = () => {
                         <Button>Entrar </Button>
                 }
             </form>
+            {
+                error &&
+                    <Error>{error}</Error>
+            }
             <PerdeuSenha to='login/recuperar-senha'>Perdeu a Senha?</PerdeuSenha>
             <Cadastro>
                 <SubTitle>Cadastre-se</SubTitle>
