@@ -48,6 +48,8 @@ export const UserStorage = ({ children }) => {
                         res ? tokenLogin(token) : userLogout()
                     })
                     .finally(() => setLoading(false))
+            }else{
+                setLogin(false);
             }
         }, [tokenLogin]
     )
