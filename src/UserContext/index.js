@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import API from '../API'
+import { useHistory } from 'react-router-dom';
 
 //Context para ter acesso aos dados do user em qualquer ponto da aplicacao.
 
@@ -12,6 +13,8 @@ export const UserStorage = ({ children }) => {
     const [login, setLogin] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const history = useHistory();
+
 
     //Login por meio de token
     const tokenLogin = useCallback(token => {
@@ -65,7 +68,9 @@ export const UserStorage = ({ children }) => {
             })
             .then(res => {
                 setData(res);
-                setLogin(true)
+                setLogin(true);
+                console.log(res)
+                history.push('/conta')
             })
             .catch(e => {
                 setError(e.message);
@@ -81,8 +86,22 @@ export const UserStorage = ({ children }) => {
         window.localStorage.removeItem('token');
     }
 
+    const createUser = (userName, email, password) => {
+
+        setError(null);
+        setLoading(true);
+
+        API.USER_POST(userName, email, password)
+            .then( () => {
+                //Se a criacao do user for OK, ele vai ser logado
+                userLogin(userName , password);
+            })
+            .catch( e => setError(e.message) )
+            .finally(() => setLoading(false))
+    }
+
     return (
-        <UserContext.Provider value={{ userLogin, userLogout, data, login, error, loading }}>
+        <UserContext.Provider value={{ userLogin, userLogout, createUser, data, login, error, loading }}>
             {children}
         </UserContext.Provider>
     )

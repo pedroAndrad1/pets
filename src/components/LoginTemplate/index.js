@@ -4,6 +4,7 @@ import bg from '../../assets/login.jpg';
 const LoginContainer = styled.section`
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 2rem;
     
     &:before{
         content: '';
@@ -12,8 +13,13 @@ const LoginContainer = styled.section`
         background-size: cover;
     }
 
-    @media(max-width: ) {
-        
+    @media(max-width: 40rem ) {
+        grid-template-columns: 1fr;
+
+        &:before{
+            display: none
+        }
+
     }
     
 `

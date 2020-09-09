@@ -10,8 +10,9 @@ import Error from '../../../utils/Error';
 
 const LoginForm = () => {
 
-    const { userLogin, loading, login, error } = useContext(UserContext);
+    const { userLogin, loading, login, error} = useContext(UserContext);
     const history = useHistory();
+
 
     //Se o usario ja estiver logado, redirecionar para a page conta
     if (login) history.push('/conta')
@@ -30,7 +31,7 @@ const LoginForm = () => {
     return (
         <section className='animeLeft'>
             <Title>Login</Title>
-            <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
+            <form onSubmit={handleSubmit} className='form'>
                 <Input
                     label='Usuário'
                     name='user'
