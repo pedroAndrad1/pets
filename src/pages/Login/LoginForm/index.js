@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 import useForm from '../../../hooks/useForm';
@@ -10,9 +10,9 @@ import Error from '../../../utils/Error';
 
 const LoginForm = () => {
 
-    const { userLogin, loading, login, error} = useContext(UserContext);
+    const { userLogin, loading, login} = useContext(UserContext);
     const history = useHistory();
-
+    const [error, setError] = useState(null);
 
     //Se o usario ja estiver logado, redirecionar para a page conta
     if (login) history.push('/conta')
@@ -20,12 +20,19 @@ const LoginForm = () => {
     const userName = useForm();
     const password = useForm();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         //Validando form
-        if (userName.validate() && password.validate())
-            userLogin(userName.value, password.value);
+        if (userName.validate() && password.validate()){
+
+          const erro = await userLogin(userName.value, password.value);
+          
+          console.log(erro)
+          setError(erro)
+            
+        }
+
     }
 
     return (

@@ -12,14 +12,16 @@ export const UserStorage = ({ children }) => {
     const [data, setData] = useState();
     const [login, setLogin] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    //const [error, setError] = useState(null);
     const history = useHistory();
+
+    //Toda function vai retornar um error, caso nao haja error no fetch, o error sera null.
 
 
     //Login por meio de token
     const tokenLogin = useCallback(token => {
 
-        setError(null);
+        //setError(null);
         setLoading(true);
 
         API.GET_USER(token)
@@ -38,7 +40,7 @@ export const UserStorage = ({ children }) => {
 
             if (token) {
 
-                setError(null);
+                //setError(null);
                 setLoading(true);
 
                 API.TOKEN_VALIDATE_POST(token)
@@ -56,12 +58,14 @@ export const UserStorage = ({ children }) => {
 
 
     //Login por meio de userName e password
-    const userLogin = (userName, password) => {
+    const userLogin = async (userName, password) => {
 
-        setError(null);
+        let error = null;
+
+        //setError(null);
         setLoading(true);
 
-        API.TOKEN_POST(userName, password)
+       await API.TOKEN_POST(userName, password)
             .then(res => {
                 window.localStorage.setItem('token', res.token);
                 return API.GET_USER(res.token);
@@ -73,35 +77,47 @@ export const UserStorage = ({ children }) => {
                 history.push('/conta')
             })
             .catch(e => {
-                setError(e.message);
+                //setError(e.message);
+                error = e.message;
             })
-            .finally(() => setLoading(false))
+            .finally(() => {
+                setLoading(false)
+            })
+
+        return error;
     }
 
     const userLogout = () => {
         setData(null);
         setLogin(false);
         setLoading(false);
-        setError(null)
+       // setError(null)
         window.localStorage.removeItem('token');
     }
 
-    const createUser = (userName, email, password) => {
+    const createUser = async (userName, email, password) => {
 
-        setError(null);
+        let error = null;
+       // setError(null);
         setLoading(true);
 
-        API.USER_POST(userName, email, password)
+        await API.USER_POST(userName, email, password)
             .then( () => {
                 //Se a criacao do user for OK, ele vai ser logado
                 userLogin(userName , password);
             })
-            .catch( e => setError(e.message) )
+            .catch( e => {
+                //setError(e.message) 
+                error = e.message;
+            }
+            )
             .finally(() => setLoading(false))
+
+        return error;
     }
 
     return (
-        <UserContext.Provider value={{ userLogin, userLogout, createUser, data, login, error, loading }}>
+        <UserContext.Provider value={{ userLogin, userLogout, createUser, data, login, loading }}>
             {children}
         </UserContext.Provider>
     )

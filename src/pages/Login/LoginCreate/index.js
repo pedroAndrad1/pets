@@ -1,26 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
 import useForm from '../../../hooks/useForm';
 import Button from '../../../components/Button';
 import { UserContext } from '../../../UserContext';
-import API from '../../../API';
+import Error from '../../../utils/Error';
+
 
 const LoginCreate = () => {
 
-    const { userLogin, loading, login, error, createUser } = useContext(UserContext);
+    const { loading, createUser} = useContext(UserContext);
 
     const userName = useForm();
     const email = useForm('email');
     const password = useForm();
+    const [error, setError] = useState(null);
 
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         //Validando form
-        if (userName.validate() && email.validate() && password.validate()) {
-            createUser(userName.value, email.value, password.value);
+        if (userName.validate() && email.validate() && password.validate()){
+            const res = await createUser(userName.value, email.value, password.value);
+            setError(res);
         }
 
     }
@@ -52,6 +54,9 @@ const LoginCreate = () => {
                         <Button disabled>Carregando</Button>
                         :
                         <Button>Cadastrar </Button>
+                }
+                {
+                    error && <Error>{error}</Error>
                 }
 
             </form>

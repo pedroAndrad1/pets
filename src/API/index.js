@@ -18,7 +18,7 @@ const TOKEN_POST = (username, password) => {
             else {
                 const json = await resposta.json();
                 console.log(json)
-                throw Error('Usuário ou senha inválidos');
+                throw Error('Nome de usuário desconhecido. Verifique novamente ou tente seu endereço de e-mail.');
             }
         })
 }
@@ -34,14 +34,15 @@ const GET_USER = (token) => {
         },
     })
         .then(async resposta => {
+
+            const json = await resposta.json();
+
             if (resposta.ok) {
-                const json = await resposta.json();
                 return json;
             }
             else {
-                const json = await resposta.json();
                 console.log(json)
-                throw Error('Não foi possível encontrar o user ');
+                throw Error(json.message);
             }
         })
 }
@@ -74,13 +75,16 @@ const USER_POST = (username, email, password) => {
         body: JSON.stringify({ username, email, password })
     })
         .then(async resposta => {
-            const res = await resposta.json()
-            console.log(res);
+            const json = await resposta.json()
+            
+            if(resposta.ok){
+                console.log(json);
+                return json;
+            }else{
+                console.log(json);
+                throw Error(json.message)
+            }
         })
-        .catch(e => {
-            throw Error('Usuário já existe');
-        })
-
 }
 
 export default {
