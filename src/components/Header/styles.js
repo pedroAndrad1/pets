@@ -20,3 +20,24 @@ export const HeaderLink = styled(Link)`
     }
 
 `
+
+export const HeaderContainer = styled.header`
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    position: fixed;
+    top: 0;
+    height: 4rem;
+    width: 100vw;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+`
+export const Nav = styled.nav`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+`

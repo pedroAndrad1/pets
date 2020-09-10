@@ -5,21 +5,26 @@ import { UserContext } from '../../../UserContext';
 //A rota conta e uma rota protegida. So pode ser acessada caso o user esteja logado.
 
 const RouteConta = props => {
-
-    const {login} = useContext(UserContext);
     const history = useHistory();
+    const {login} = useContext(UserContext);
+
+    console.log('entrei aqui');
+    console.log(login);
+
+
 
     switch(login){
-        
         //Se o user esta logado, ele pode acessar a conta
         case true:
             return <Route {...props} />
         //Caso nao esteja deve ir para login
         case false:
             history.push('/login');
+            return <></>
         //Caso isso nao tenha sido averiguado, deve retornar nada.
         default:
-            return null;
+            console.log('entrei default');
+            return <></>
     }
 
 /*

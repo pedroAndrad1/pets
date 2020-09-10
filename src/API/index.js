@@ -48,14 +48,14 @@ const GET_USER = (token) => {
 }
 
 //Valida o token
-const TOKEN_VALIDATE_POST = token => {
+const TOKEN_VALIDATE_POST =  token => {
 
     return fetch(`${URL}/jwt-auth/v1/token/validate`, {
         method: 'POST',
         headers: {
             Authorization: 'Bearer ' + token
         }
-    }).then(res => {
+    }).then( res => {
         if (res.ok) {
             return true;
         } else {

@@ -10,7 +10,7 @@ export const UserContext = createContext();
 export const UserStorage = ({ children }) => {
 
     const [data, setData] = useState();
-    const [login, setLogin] = useState(false);
+    const [login, setLogin] = useState(null);
     const [loading, setLoading] = useState(false);
     //const [error, setError] = useState(null);
     const history = useHistory();
@@ -19,12 +19,12 @@ export const UserStorage = ({ children }) => {
 
 
     //Login por meio de token
-    const tokenLogin = useCallback(token => {
+    const tokenLogin = useCallback(async token => {
 
         //setError(null);
         setLoading(true);
 
-        API.GET_USER(token)
+       await API.GET_USER(token)
             .then(res => {
                 setData(res);
                 setLogin(true)
@@ -33,9 +33,13 @@ export const UserStorage = ({ children }) => {
             .finally(() => setLoading(false))
     }, [])
 
+    
+    //useEffect(() => autoLogin(), [autoLogin]);
     //Realiza o login no carregamento, caso tenha o token
-    const autoLogin = useCallback(
-        () => {
+    useEffect( () => {
+        
+        //Estou criando a funcao aqui para poder usar o async/await
+        const autoLogin = async () => {
             const token = window.localStorage.getItem('token');
 
             if (token) {
@@ -43,7 +47,7 @@ export const UserStorage = ({ children }) => {
                 //setError(null);
                 setLoading(true);
 
-                API.TOKEN_VALIDATE_POST(token)
+               await API.TOKEN_VALIDATE_POST(token)
                     .then(res => {
                         res ? tokenLogin(token) : userLogout()
                     })
@@ -51,13 +55,12 @@ export const UserStorage = ({ children }) => {
             }else{
                 setLogin(false);
             }
-        }, [tokenLogin]
-    )
+        }
 
+        //Chamando a funcao
+        autoLogin();
 
-
-    useEffect(() => autoLogin(), [autoLogin]);
-
+    }, [tokenLogin])
 
     //Login por meio de userName e password
     const userLogin = async (userName, password) => {
