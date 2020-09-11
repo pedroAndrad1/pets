@@ -1,38 +1,33 @@
-import React, { useState, useContext } from 'react';
-import { StyledUserNav } from './styles';
-import { NavLink } from 'react-router-dom';
-import { UserContext } from '../../../UserContext';
-//Tenho que importar os svgs como components para poder mudar seu fill.
-//Obs: Ele preica ser importado com um nome iniciado por letra maiuscula. Senao nao funciona.
-import { ReactComponent as FeedIcon } from '../../../assets/feed.svg';
-import { ReactComponent as StatsIcon } from '../../../assets/estatisticas.svg';
-import { ReactComponent as AddIcon } from '../../../assets/adicionar.svg';
-import { ReactComponent as LogoutIcon } from '../../../assets/sair.svg';
+import React, { useEffect, useState} from 'react';
+import { MobileNavButton } from './styles';
+import useMedia from '../../../hooks/useMedia';
+import NavMobile from './NavMobile';
+import Nav from './Nav';
 
 const UserNav = () => {
-    const [mobile, setMobile] = useState(null);
-    const {userLogout} = useContext(UserContext);
     
-    return (
-        <StyledUserNav>
-            <NavLink to='/conta' exact>
-                <FeedIcon />
-                {mobile && 'Minhas fotos'}
-            </NavLink>
-            <NavLink to='/conta/estatisticas'>
-                <StatsIcon />
-                {mobile && 'Estatísticas'}
-            </NavLink>
-            <NavLink to='/conta/postar'>
-                <AddIcon />
-                {mobile && 'Adicionar foto'}
-            </NavLink>
-            <button onClick={userLogout}>
-                <LogoutIcon />
-                {mobile && 'Logout'}
-            </button>
+    const mobile = useMedia('(max-width: 40rem)');
+    const [active, setActive] = useState(false);
+    const {pathname} = window.location;
 
-        </StyledUserNav>
+    //Para fechar o menu com a mudanca na url
+    useEffect( () =>{
+        setActive(false);
+    }, [pathname])
+
+    return (
+
+        <>
+            {
+                mobile?
+                    <>
+                        <MobileNavButton active={active} onClick={() => setActive(!active)} />
+                        <NavMobile active={active} />
+                    </>
+                    :
+                        <Nav />
+            }
+        </>
     )
 }
 export default UserNav;

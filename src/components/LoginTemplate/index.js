@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import bg from '../../assets/login.jpg';
+
 const LoginContainer = styled.section`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    
+    width: 100%;
+
     &:before{
         content: '';
         display: block;

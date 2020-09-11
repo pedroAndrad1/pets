@@ -21,6 +21,10 @@ const StyledTitle = styled.h1`
         border-radius: .5rem;
         z-index: -1;
     }
+
+    @media(max-width: 40rem){
+        font-size: 2.5rem;
+    }
 `
 
 const Title = ({ children }) => {
