@@ -23,7 +23,7 @@ const StyledTitle = styled.h1`
     }
 
     @media(max-width: 40rem){
-        font-size: 2.5rem;
+        font-size: 2.3rem;
     }
 `
 

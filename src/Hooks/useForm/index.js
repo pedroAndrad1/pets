@@ -10,6 +10,10 @@ const validations = {
     password: {
         rule: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
         message: 'A senha deve ter pelo menos 8 caracteres, com no mínimo uma letra e um número'
+    },
+    number: {
+        rule: /^\d+$/,
+        message: 'Utilize números apenas.',
     }
 }
 const useForm = (validation) => {

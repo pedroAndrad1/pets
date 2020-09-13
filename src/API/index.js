@@ -87,9 +87,30 @@ const USER_POST = (username, email, password) => {
         })
 }
 
+//Cadastra um user
+const PHOTO_POST = (formData, token) => {
+
+    return fetch(`${URL}/api/photo`, {
+        method: 'POST',
+        headers: {
+            Authorization: 'Bearer ' + token,
+        },
+        body: formData
+    })
+        .then(async resposta => {
+            const json = await resposta.json()
+            console.log(json);
+
+            if(!resposta.ok){
+                throw Error(json.message);
+            }
+        })
+}
+
 export default {
     TOKEN_POST,
     GET_USER,
     TOKEN_VALIDATE_POST,
-    USER_POST
+    USER_POST,
+    PHOTO_POST
 }

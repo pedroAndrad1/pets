@@ -53,7 +53,7 @@ const LoginForm = () => {
                     loading ?
                         <Button disabled>Carregando</Button>
                         :
-                        <Button>Entrar </Button>
+                        <Button>Entrar</Button>
                 }
             </form>
             {

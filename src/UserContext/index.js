@@ -121,8 +121,26 @@ export const UserStorage = ({ children }) => {
         return error;
     }
 
+    const photoPost = async (formData, token) => {
+
+        let error = null;
+        // setError(null);
+         setLoading(true);
+
+         await API.PHOTO_POST(formData, token)
+                .then( () => {
+                    history.push('/conta');
+                })
+                .catch(e => {
+                    error = e.message;
+                })
+                .finally(() => setLoading(false) );
+
+        return error;
+    }
+
     return (
-        <UserContext.Provider value={{ userLogin, userLogout, createUser, data, login, loading }}>
+        <UserContext.Provider value={{ userLogin, userLogout, createUser, photoPost, data, login, loading }}>
             {children}
         </UserContext.Provider>
     )
