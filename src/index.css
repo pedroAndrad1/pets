@@ -18,6 +18,9 @@ a{
     padding: .5rem;
 }
 
+img {
+    max-width: 100%;
+}
 
 /*Para posicionar o footer no final da page*/
 #root{

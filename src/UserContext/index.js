@@ -139,6 +139,26 @@ export const UserStorage = ({ children }) => {
         return error;
     }
 
+    /*
+
+    ESTA CAUSANDO UM LOOP INFINITO QUANDO USADA EM UM useEfect!
+    JA TENTEI USAR O useCallback.
+
+    const getPhotos =  async ({ page, total, user }) => {
+        
+        let error = null;
+
+        setLoading(true);
+
+        const res = await API.PHOTOS_GET({ page, total, user })
+            .catch(e => error = e.message)
+            .finally( () => setLoading(false) );
+
+        return [res, error];
+
+    }
+    */
+
     return (
         <UserContext.Provider value={{ userLogin, userLogout, createUser, photoPost, data, login, loading }}>
             {children}

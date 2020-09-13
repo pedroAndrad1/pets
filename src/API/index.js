@@ -48,14 +48,14 @@ const GET_USER = (token) => {
 }
 
 //Valida o token
-const TOKEN_VALIDATE_POST =  token => {
+const TOKEN_VALIDATE_POST = token => {
 
     return fetch(`${URL}/jwt-auth/v1/token/validate`, {
         method: 'POST',
         headers: {
             Authorization: 'Bearer ' + token
         }
-    }).then( res => {
+    }).then(res => {
         if (res.ok) {
             return true;
         } else {
@@ -76,11 +76,11 @@ const USER_POST = (username, email, password) => {
     })
         .then(async resposta => {
             const json = await resposta.json()
-            
-            if(resposta.ok){
+
+            if (resposta.ok) {
                 console.log(json);
                 return json;
-            }else{
+            } else {
                 console.log(json);
                 throw Error(json.message)
             }
@@ -88,9 +88,9 @@ const USER_POST = (username, email, password) => {
 }
 
 //Cadastra um user
-const PHOTO_POST = (formData, token) => {
+const PHOTO_POST =async (formData, token) => {
 
-    return fetch(`${URL}/api/photo`, {
+    return await fetch(`${URL}/api/photo`, {
         method: 'POST',
         headers: {
             Authorization: 'Bearer ' + token,
@@ -101,10 +101,34 @@ const PHOTO_POST = (formData, token) => {
             const json = await resposta.json()
             console.log(json);
 
-            if(!resposta.ok){
+            if (!resposta.ok) {
                 throw Error(json.message);
             }
         })
+}
+
+//Pega as photos
+const PHOTOS_GET = async ({ page, total, user }) => {
+
+    return await fetch(`${URL}/api/photo/?_page=${page}&_total=${total}&_user=${user}`, {
+        options: {
+            method: 'GET',
+            /*Para a foto poder aparecer logo dps de ser postada. Pois sera necessario uma nova consulta, 
+            ja que o resultado dessa nao estara salvo em cache */
+            cache: 'no-store', 
+        },
+    })
+    .then( async res => {
+        const json = await res.json();
+        console.log(json);
+        return json;
+    })
+    .catch(e =>  {
+        //throw Error('Deu ruim nas photos')
+        throw Error(e.message);
+    })
+    
+
 }
 
 export default {
@@ -112,5 +136,6 @@ export default {
     GET_USER,
     TOKEN_VALIDATE_POST,
     USER_POST,
-    PHOTO_POST
+    PHOTO_POST,
+    PHOTOS_GET
 }

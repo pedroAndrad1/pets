@@ -56,7 +56,7 @@ const UserPhotoPost = () => {
     }
 
     return (
-        <PostContainer>
+        <PostContainer className='animeLeft'>
             <form onSubmit={handleSubmit}>
                 <Input label='Nome' {...nome} />
                 <Input label='Idade' {...idade} />
