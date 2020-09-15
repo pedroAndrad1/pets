@@ -5,7 +5,7 @@ export const Item = styled.li`
 
     border-radius: .2rem;
     cursor: pointer;
-
+    overflow: hidden;
     /** Para ajustar o icone,o numero de visualizacoes e a photo, o FeedItem tera display grid. 
         Assim vou poder colocar ambos na mesma posicao de linha e coluna,
         fazendo o icone ficar sobre posto a photo.
@@ -36,6 +36,8 @@ export const Item = styled.li`
             grid-column: initial;
             grid-row: initial;
         }
+
+        
     }
 
 `

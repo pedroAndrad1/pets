@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@700&display=swap');
 
+* {
+    box-sizing: border-box;
+  }
+  
+
 body{
     --primary: #333;
     --type-first: Helvetica, Arial, sans-serif;
@@ -18,9 +23,17 @@ a{
     padding: .5rem;
 }
 
-img {
-    max-width: 100%;
+ul,
+li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
 }
+
+img {
+    display: block;
+    max-width: 100%;
+  }
 
 /*Para posicionar o footer no final da page*/
 #root{

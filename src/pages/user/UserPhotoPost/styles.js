@@ -8,7 +8,13 @@ export const PostContainer = styled.div`
     gap: 2rem;
     margin-bottom: 1rem;
 
+
+    @media (max-width: 600px){
+        
+        grid-template-columns: 1fr ;
+     }
 `
+
 /*Vou usar a img de preview como background para poder controlar melhor */
 export const Preview = styled.div`
 
@@ -23,6 +29,10 @@ export const Preview = styled.div`
         display: block;
         height: 0;
         padding-bottom: 100%;
+    }
+
+    @media (max-width: 600px){
+        display: none;
     }
 
 `

@@ -121,13 +121,39 @@ const PHOTOS_GET = async ({ page, total, user }) => {
     .then( async res => {
         const json = await res.json();
         console.log(json);
-        return json;
+
+        if(res.ok){
+            return json;
+        }else{
+
+            throw new Error('Não foi possível carregar as photos :(');
+        } 
     })
-    .catch(e =>  {
-        //throw Error('Deu ruim nas photos')
-        throw Error(e.message);
+
+}
+
+//Pega uma photo especifica
+const PHOTO_GET = async id => {
+
+    console.log('recebi', id)
+
+    return await fetch(`${URL}/api/photo/${id}`, {
+        options: {
+            method: 'GET',
+            cache: 'no-store',
+          }
     })
-    
+    .then( async res => {
+
+        const json = await res.json();
+        console.log(json);
+
+        if(res.ok){
+            return json;
+        }else{
+            throw new Error(json.message);
+        } 
+    })
 
 }
 
@@ -137,5 +163,6 @@ export default {
     TOKEN_VALIDATE_POST,
     USER_POST,
     PHOTO_POST,
-    PHOTOS_GET
+    PHOTOS_GET,
+    PHOTO_GET
 }

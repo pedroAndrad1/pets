@@ -9,6 +9,7 @@ export const FeedContainer = styled.ul`
 
     @media (max-width: 40rem){
         grid-template-columns: repeat(2, 1fr);
+          
     }
         
 `

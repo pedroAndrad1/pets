@@ -1,18 +1,20 @@
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FeedItem from './FeedItem';
 import { FeedContainer } from './styles';
 import Error from '../../utils/Error';
 import API from '../../API';
+import PhotoModal from './PhotoModal';
 
 
 const Feed = () => {
 
     const [photos, setPhotos] = useState()
-    const [error, setError] = useState()
+    const [error, setError] = useState(null)
     /*Estou fazendo o loading aqui pq estava tendo problemas de loop infinito no useEfect 
       com uma funcao getPhotos do UserContext que usa a funcao PHOTOS_GET. Entao vou fazer a logica dela aqui.
     */
     const [loading, setLoading] = useState(false);
+    const [modalPhoto, setModalPhoto] = useState(null);
 
 
 
@@ -23,9 +25,9 @@ const Feed = () => {
             setLoading(true)
 
             await API.PHOTOS_GET({ page: 1, total: 6, user: 0 })
-                .then( res => setPhotos(res) )
-                .catch(e => setError(e.message) )
-                .finally( setLoading(false) );
+                .then(res => setPhotos(res))
+                .catch(e => setError(e.message))
+                .finally(setLoading(false));
         }
 
         fetchPhotos();
@@ -33,20 +35,25 @@ const Feed = () => {
     }, [])
 
     return (
-        <FeedContainer className='animeLeft'>
+        <>
             {
-                photos &&
-                photos.map((photo) => {
-                    return (<FeedItem key={photo.id} photo={photo} />)
-                })
+                modalPhoto && <PhotoModal photo={modalPhoto} setModalPhoto={setModalPhoto} />
             }
-            {
-                loading && <p>Loading...</p>
-            }
-            {
-                error && <Error>{error}</Error>
-            }
-        </FeedContainer>
+            <FeedContainer className='animeLeft'>
+                {
+                    photos &&
+                    photos.map((photo) => {
+                        return (<FeedItem key={photo.id} photo={photo} setModalPhoto={setModalPhoto} />)
+                    })
+                }
+                {
+                    loading && <p>Loading...</p>
+                }
+                {
+                    error && <Error>{error}</Error>
+                }
+            </FeedContainer>
+        </>
     )
 }
 export default Feed;
