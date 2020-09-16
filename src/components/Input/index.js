@@ -35,13 +35,18 @@ const Error = styled.span`
 
 `
 
-const Input = ({ name, label, error, ...props}) => {
+const Input = ({ name, label, noLabel, noError, error, as, ...props}) => {
     return (
         <Container>
-            <Label htmlFor={name}>{label}</Label>
-            <StyledInput id={name} name={name} {...props}  />
             {
-                error && <Error>{error}</Error>
+                noLabel? 
+                 <Label htmlFor={name} style={{display: "none"}}>{label}</Label>
+                 :
+                 <Label htmlFor={name}>{label}</Label>
+            }
+            <StyledInput as={as} id={name} name={name} {...props}  />
+            {
+               (!noError && error ) && <Error>{error}</Error>
             }
         </Container>
     )

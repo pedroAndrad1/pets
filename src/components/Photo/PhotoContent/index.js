@@ -28,9 +28,7 @@ const PhotoContent = ({ photoData }) => {
                     }
                 </Attributes>
             </Details>
-            <PhotoComments>
-                Comentarios aqui
-            </PhotoComments>
+            <PhotoComments photoComments = {comments} photoId = {photo.id} />
         </ModalContainer>
     )
 

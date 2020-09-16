@@ -88,7 +88,7 @@ const USER_POST = (username, email, password) => {
 }
 
 //Cadastra um user
-const PHOTO_POST =async (formData, token) => {
+const PHOTO_POST = async (formData, token) => {
 
     return await fetch(`${URL}/api/photo`, {
         method: 'POST',
@@ -111,51 +111,74 @@ const PHOTO_POST =async (formData, token) => {
 const PHOTOS_GET = async ({ page, total, user }) => {
 
     return await fetch(`${URL}/api/photo/?_page=${page}&_total=${total}&_user=${user}`, {
-        options: {
-            method: 'GET',
-            /*Para a foto poder aparecer logo dps de ser postada. Pois sera necessario uma nova consulta, 
-            ja que o resultado dessa nao estara salvo em cache */
-            cache: 'no-store', 
-        },
+        method: 'GET',
+        /*Para a foto poder aparecer logo dps de ser postada. Pois sera necessario uma nova consulta, 
+        ja que o resultado dessa nao estara salvo em cache */
+        cache: 'no-store',
     })
-    .then( async res => {
-        const json = await res.json();
-        console.log(json);
+        .then(async res => {
+            const json = await res.json();
+            console.log(json);
 
-        if(res.ok){
-            return json;
-        }else{
+            if (res.ok) {
+                return json;
+            } else {
 
-            throw new Error('Não foi possível carregar as photos :(');
-        } 
-    })
+                throw new Error('Não foi possível carregar as photos :(');
+            }
+        })
 
 }
 
 //Pega uma photo especifica
 const PHOTO_GET = async id => {
 
-    console.log('recebi', id)
-
     return await fetch(`${URL}/api/photo/${id}`, {
-        options: {
-            method: 'GET',
-            cache: 'no-store',
-          }
+        method: 'GET',
+        cache: 'no-store',
     })
-    .then( async res => {
+        .then(async res => {
 
-        const json = await res.json();
-        console.log(json);
+            const json = await res.json();
+            console.log(json);
 
-        if(res.ok){
-            return json;
-        }else{
-            throw new Error(json.message);
-        } 
-    })
+            if (res.ok) {
+                return json;
+            } else {
+                throw new Error(json.message);
+            }
+        })
 
 }
+
+//Posta um comentario
+const COMMENT_POST = async (id, comment, token) => {
+
+    console.log(comment);
+
+    return await fetch(`${URL}/api/comment/${id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
+        },
+        body: JSON.stringify(comment),
+
+    })
+        .then(async res => {
+
+            const json = await res.json();
+            // console.log(json);
+
+            if (res.ok) {
+                return json;
+            } else {
+                throw new Error(json.message);
+            }
+        })
+
+}
+
 
 export default {
     TOKEN_POST,
@@ -164,5 +187,6 @@ export default {
     USER_POST,
     PHOTO_POST,
     PHOTOS_GET,
-    PHOTO_GET
+    PHOTO_GET,
+    COMMENT_POST
 }

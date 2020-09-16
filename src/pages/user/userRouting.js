@@ -10,14 +10,6 @@ import UserHeader from '../../components/UserHeader';
 
 const userRouting = () => {
 
-    const Teste = () => {
-
-        return(
-            <div>teste</div>
-        )
-    }
-
-
     /*Se usar o BrowserRouter englobando o switch, o roteamento so vai funcionar quando carregar a pagina.
       Ou seja, quando clicar nos botoes, o roteamento nao vai funcionar. Apenas para o home.  
     */

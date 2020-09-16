@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import API from '../../../API';
-import { UserContext } from '../../../UserContext';
 import Error from '../../../utils/Error';
 import PhotoContent from '../../Photo/PhotoContent';
 import { Modal } from './styles';
