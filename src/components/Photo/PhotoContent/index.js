@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Attributes, Author, Details, ModalContainer, Photo, Views } from './styles';
 import Title from '../../Title';
 import PhotoComments from '../PhotoComments';
+import { UserContext } from '../../../UserContext';
+import DeleteButton from '../DeleteButton';
 
 const PhotoContent = ({ photoData }) => {
 
     const { photo, comments } = photoData;
+    const { data } = useContext(UserContext);
 
     return (
         <ModalContainer>
             <Photo src={photo.src} alt={photo.alt} />
             <Details>
                 <Author>
-                    <Link to={`/perfil/${photo.author}`} >@{photo.author}</Link>
+                    {   
+                        //O user esta logada e tbm e o author da photo?
+                        data && (data.username === photo.author) ?
+                            //Mostra o botao de delete
+                            <DeleteButton id={photo.id}/>
+                            :
+                            //Caso contrario, mostra o "@" do author
+                            <Link to={`/perfil/${photo.author}`} >@{photo.author}</Link>
+                    }
                     <Views>{photo.acessos}</Views>
                 </Author>
                 <Title>

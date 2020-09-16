@@ -154,8 +154,6 @@ const PHOTO_GET = async id => {
 //Posta um comentario
 const COMMENT_POST = async (id, comment, token) => {
 
-    console.log(comment);
-
     return await fetch(`${URL}/api/comment/${id}`, {
         method: 'POST',
         headers: {
@@ -179,6 +177,28 @@ const COMMENT_POST = async (id, comment, token) => {
 
 }
 
+//Deleta uma photo
+const PHOTO_DELETE = async id => {
+    
+    return await fetch(`${URL}/api/photo/${id}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+        },
+    })
+        .then(async res => {
+
+            const json = await res.json();
+            console.log(json);
+
+            if (res.ok) {
+                return json;
+            } else {
+                throw new Error(json.message);
+            }
+        })
+}
+
 
 export default {
     TOKEN_POST,
@@ -188,5 +208,6 @@ export default {
     PHOTO_POST,
     PHOTOS_GET,
     PHOTO_GET,
-    COMMENT_POST
+    COMMENT_POST,
+    PHOTO_DELETE
 }
