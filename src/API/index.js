@@ -152,13 +152,13 @@ const PHOTO_GET = async id => {
 }
 
 //Posta um comentario
-const COMMENT_POST = async (id, comment, token) => {
+const COMMENT_POST = async (id, comment) => {
 
     return await fetch(`${URL}/api/comment/${id}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + token,
+            Authorization: 'Bearer ' + window.localStorage.getItem('token'),
         },
         body: JSON.stringify(comment),
 

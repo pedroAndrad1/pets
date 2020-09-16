@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import useForm from '../../../../hooks/useForm';
 import Input from '../../../Input';
 import { ReactComponent as EnviarIcon } from '../../../../assets/enviar.svg';
 import API from '../../../../API';
 import { CommentArea, SubmitButton } from './styles';
 
-const FormComment = ({ setComments, photoId }) => {
 
+const FormComment = ({ setComments, photoId }) => {
+    
+    const inputRef = useRef(null);
+    const buttonRef = useRef(null);
     const commentInput = useForm();
 
     const handleSubmit = async event => {
@@ -14,12 +17,14 @@ const FormComment = ({ setComments, photoId }) => {
 
         //checando se ha algum comentario
         if(commentInput.validate()){
-            const token = window.localStorage.getItem('token');
+            //Desabilitando o button para nao acumular envios com clicks consecutivos
+            buttonRef.current.disabled = true;
+
             //A API espera o comment em forma de obj
             const comment = commentInput.value;
             console.log(comment);
 
-            await API.COMMENT_POST(photoId, {comment}, token )
+            await API.COMMENT_POST(photoId, {comment})
                 .then(res => {
                     //limpando o formulario
                     commentInput.setValue('');
@@ -28,8 +33,13 @@ const FormComment = ({ setComments, photoId }) => {
                         useState. O parametro da function e o valor atualo do state.
                     */
                     setComments((comments) => [...comments, res]);
+                    //Focando de volta no textArea
+                    inputRef.current.focus();
+                    
                 })
                 .catch(e => console.log(e.message))
+                .finally(() =>  buttonRef.current.disabled = false )
+
         }
     }
 
@@ -44,8 +54,9 @@ const FormComment = ({ setComments, photoId }) => {
                 noLabel
                 noError
                 placeholder='Comente aqui'
+                ref={inputRef}
                 />
-            <SubmitButton>
+            <SubmitButton type='submit' ref={buttonRef}>
                 <EnviarIcon />
             </SubmitButton>
         </CommentArea>

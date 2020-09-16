@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { UserContext } from '../../../UserContext';
 import FormComment from './FormComment';
 import { CommentsSection } from './styles';
@@ -7,10 +7,17 @@ const PhotoComments = ({ photoComments, photoId }) => {
 
     const { login } = useContext(UserContext)
     const [comments, setComments] = useState(() => photoComments)
+    const commentsSection = useRef(null);
+
+    //scrolla para o fim do CommentsSection quando e adicionado um comments
+    useEffect(() => {
+        //A quantidade de scroll e igual a altura do scroll
+        commentsSection.current.scrollTop = commentsSection.current.scrollHeight;
+      }, [comments]);
 
     return (
         <>
-            <CommentsSection>
+            <CommentsSection ref={commentsSection}>
                 {
                     comments && comments.map(comment => {
                         return (
