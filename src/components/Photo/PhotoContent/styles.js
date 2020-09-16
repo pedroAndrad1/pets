@@ -45,7 +45,7 @@ export const Photo = styled.img`
     
 `
 export const Details = styled.div`
-    padding: 2rem 2rem 0 2rem;
+    padding: 1.5rem 1.5rem 0 2rem;
 
 `
 export const Author = styled.p`

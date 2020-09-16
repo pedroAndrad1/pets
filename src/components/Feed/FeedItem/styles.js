@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import viewIcon from '../../../assets/visualizacao.svg';
 
+
+
 export const Item = styled.li`
 
     border-radius: .2rem;

@@ -9,7 +9,8 @@ const StyledInput = styled.input`
     border-radius: .4rem;
     background: #eee;
     transition: .3s;
-    width: 90%;
+    width: 100%;
+    resize: none;
 
     &:hover, &:focus{
         outline: none;
@@ -44,7 +45,7 @@ const Input = ({ name, label, noLabel, noError, error, as, ...props}) => {
                  :
                  <Label htmlFor={name}>{label}</Label>
             }
-            <StyledInput as={as} id={name} name={name} {...props}  />
+            <StyledInput as={as} id={name} name={name} {...props} />
             {
                (!noError && error ) && <Error>{error}</Error>
             }

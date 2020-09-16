@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../../UserContext';
 import FormComment from './FormComment';
+import { CommentsSection } from './styles';
 
 const PhotoComments = ({ photoComments, photoId }) => {
 
@@ -9,7 +10,7 @@ const PhotoComments = ({ photoComments, photoId }) => {
 
     return (
         <>
-            <ul>
+            <CommentsSection>
                 {
                     comments && comments.map(comment => {
                         return (
@@ -20,7 +21,7 @@ const PhotoComments = ({ photoComments, photoId }) => {
                         )
                     })
                 }
-            </ul>
+            </CommentsSection>
             {
                 login && <FormComment setComments={setComments} photoId= {photoId}/>
             }

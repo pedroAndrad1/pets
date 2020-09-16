@@ -3,6 +3,7 @@ import useForm from '../../../../hooks/useForm';
 import Input from '../../../Input';
 import { ReactComponent as EnviarIcon } from '../../../../assets/enviar.svg';
 import API from '../../../../API';
+import { CommentArea, SubmitButton } from './styles';
 
 const FormComment = ({ setComments, photoId }) => {
 
@@ -34,7 +35,7 @@ const FormComment = ({ setComments, photoId }) => {
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <CommentArea onSubmit={handleSubmit}>
             <Input
                 as='textarea'
                 label='Comente aqui'
@@ -42,11 +43,12 @@ const FormComment = ({ setComments, photoId }) => {
                 {...commentInput}
                 noLabel
                 noError
-                placeholder='Comente aqui' />
-            <button>
+                placeholder='Comente aqui'
+                />
+            <SubmitButton>
                 <EnviarIcon />
-            </button>
-        </form>
+            </SubmitButton>
+        </CommentArea>
     )
 
 }

@@ -8,7 +8,7 @@ import PhotoModal from './PhotoModal';
 
 const Feed = () => {
 
-    const [photos, setPhotos] = useState()
+    const [photos, setPhotos] = useState(null)
     const [error, setError] = useState(null)
     /*Estou fazendo o loading aqui pq estava tendo problemas de loop infinito no useEfect 
       com uma funcao getPhotos do UserContext que usa a funcao PHOTOS_GET. Entao vou fazer a logica dela aqui.
@@ -39,20 +39,23 @@ const Feed = () => {
             {
                 modalPhoto && <PhotoModal photo={modalPhoto} setModalPhoto={setModalPhoto} />
             }
-            <FeedContainer className='animeLeft'>
-                {
-                    photos &&
-                    photos.map((photo) => {
-                        return (<FeedItem key={photo.id} photo={photo} setModalPhoto={setModalPhoto} />)
-                    })
-                }
-                {
-                    loading && <p>Loading...</p>
-                }
-                {
-                    error && <Error>{error}</Error>
-                }
-            </FeedContainer>
+            {
+                loading && <p>Loading...</p>
+            }
+            {
+                photos &&
+                    <FeedContainer className='animeLeft'>
+                        {
+                            (!loading && photos) &&
+                            photos.map((photo) => {
+                                return (<FeedItem key={photo.id} photo={photo} setModalPhoto={setModalPhoto} />)
+                            })
+                        }
+                        {
+                            error && <Error>{error}</Error>
+                        }
+                    </FeedContainer>
+            }
         </>
     )
 }
