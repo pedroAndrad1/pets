@@ -26,9 +26,9 @@ const UserPhotoPost = () => {
 
             const formData = new FormData();
             //E preciso dar uma chave para cada append
-            formData.append('nome', nome);
-            formData.append('idade', idade);
-            formData.append('peso', peso);
+            formData.append('nome', nome.value);
+            formData.append('idade', idade.value);
+            formData.append('peso', peso.value);
             //Passarei o raw pq e esse que contem o arquivo
             formData.append('img', img.raw);
 
