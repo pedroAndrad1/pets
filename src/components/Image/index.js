@@ -4,7 +4,7 @@ import { Img, Skeleton, Wrapper } from './styles';
 
 //Antes de uma img aparecer, um skeleton dela ocupara o lugar.
 
-const Image = ({alt,...props}) => {
+const Image = ({modalPhoto, alt,...props}) => {
 
     const [skeleton, setSkeleton] = useState(true);
 
@@ -18,7 +18,7 @@ const Image = ({alt,...props}) => {
     }
 
     return(
-        <Wrapper>
+        <Wrapper modalPhoto={modalPhoto}>
             { skeleton && <Skeleton />}
             {/**O TSLint reclama se nao passar a props assim */}
             <Img alt={alt} {...props} onLoad={handleLoad}/>

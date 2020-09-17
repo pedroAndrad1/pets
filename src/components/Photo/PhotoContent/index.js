@@ -5,6 +5,7 @@ import Title from '../../Title';
 import PhotoComments from '../PhotoComments';
 import { UserContext } from '../../../UserContext';
 import DeleteButton from '../DeleteButton';
+import Image from '../../Image';
 
 const PhotoContent = ({ photoData }) => {
 
@@ -13,7 +14,7 @@ const PhotoContent = ({ photoData }) => {
 
     return (
         <ModalContainer>
-            <Photo src={photo.src} alt={photo.alt} />
+            <Image modalPhoto src={photo.src} alt={photo.alt} />
             <Details>
                 <Author>
                     {   
@@ -32,7 +33,7 @@ const PhotoContent = ({ photoData }) => {
                 </Title>
                 <Attributes>
                     <li>{photo.peso} Kg</li>
-                     { photo > 1? 
+                     { photo.idade > 1? 
                         <li>{photo.idade} anos</li> 
                         : 
                         <li>{photo.idade} ano </li> 

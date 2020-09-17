@@ -1,8 +1,25 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 /** Para colocar o skeleton em cima da img */
 export const Wrapper = styled.div`
     display: grid;
+
+    /**NAO SE ESQUECA DE POR O RETURN!!!! */
+    ${
+        ({modalPhoto}) => {
+            return modalPhoto && 
+                css`
+                    grid-row: 1/4;
+
+                    @media (max-width: 64rem){
+                        grid-row: 1;
+                    }
+                `
+        }
+    }
+
+
+   
 `
 /**A opacity sera mudade no carragemento da imagem */
 export const Img = styled.img`

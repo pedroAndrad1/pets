@@ -35,15 +35,17 @@ export const ModalContainer = styled.div`
   }
 
 `
+/*
 export const Photo = styled.img`
-    /**Para ocupar as tres linhas do grid */
+    /**Para ocupar as tres linhas do grid 
     grid-row: 1/4;
 
     @media (max-width: 64rem){
         grid-row: 1;
      }
-    
 `
+*/
+
 export const Details = styled.div`
     padding: 1.5rem 1.5rem 0 2rem;
 
