@@ -1,12 +1,12 @@
 import React from 'react';
+import Container from '../components/Container';
+import Feed from '../components/Feed';
 
 function Home() {
   return (
-    <>
-
-      <div>Pets</div>
-
-    </>
+    <Container>
+      <Feed />
+    </Container>
   );
 }
 

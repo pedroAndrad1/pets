@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 import ViewsBlackIcon from '../../../assets/visualizacao-black.svg';
-import Image from '../../Image';
 
 /** Animation de entrada do modal, faz um efeito de crescimento */
 const scaleUp = keyframes`

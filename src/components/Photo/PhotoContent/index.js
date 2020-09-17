@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Attributes, Author, Details, ModalContainer, Photo, Views } from './styles';
+import { Attributes, Author, Details, ModalContainer, Views } from './styles';
 import Title from '../../Title';
 import PhotoComments from '../PhotoComments';
 import { UserContext } from '../../../UserContext';

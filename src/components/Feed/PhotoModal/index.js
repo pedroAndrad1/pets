@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import API from '../../../API';
 import Error from '../../../utils/Error';
+import Loading from '../../../utils/Loading';
 import PhotoContent from '../../Photo/PhotoContent';
 import { Modal } from './styles';
 
@@ -10,7 +11,7 @@ const PhotoModal = ( {photo, setModalPhoto} ) => {
     //const {loading, getPhoto} = useContext(UserContext);
     const [photoData, setPhotoData] = useState(null);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     /** Mais uma vez tive problema de looping infinito e tive que quebrar o padrao de
      *  usar uma funcao do UserContext para realizar o fetch. Preciso pensar em uma
@@ -57,7 +58,7 @@ const PhotoModal = ( {photo, setModalPhoto} ) => {
     return(
         <Modal onClick={handleOutsideClick}>
             {error && <Error>{error}</Error>}
-            {loading && <p>Carregando . . .</p>}
+            {loading && <Loading />}
             {photoData && <PhotoContent photoData={photoData}/>}
         </Modal>
     )
