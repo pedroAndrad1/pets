@@ -28,7 +28,7 @@ export const HeaderContainer = styled.header`
     top: 0;
     height: 4rem;
     width: 100vw;
-    z-index: 100;
+    z-index: 2000;
 
     display: flex;
     align-items: center;

@@ -1,68 +1,84 @@
-import React, { useContext, useEffect, useState } from 'react';
-import FeedItem from './FeedItem';
-import { FeedContainer } from './styles';
-import Error from '../../utils/Error';
-import API from '../../API';
+import React, { useEffect, useState } from 'react';
 import PhotoModal from './PhotoModal';
-import Loading from '../../utils/Loading';
-import { UserContext } from '../../UserContext';
+import FeedPhotos from './FeedPhotos';
+import { Fim } from './styles';
 
 
-const Feed = ({home}) => {
+const Feed = ({ home }) => {
 
-    const {data} = useContext(UserContext);
-    
-
-
-    const [photos, setPhotos] = useState(null)
-    const [error, setError] = useState(null)
-    /*Estou fazendo o loading aqui pq estava tendo problemas de loop infinito no useEfect 
-      com uma funcao getPhotos do UserContext que usa a funcao PHOTOS_GET. Entao vou fazer a logica dela aqui.
-    */
-    const [loading, setLoading] = useState(true);
     const [modalPhoto, setModalPhoto] = useState(null);
-
-
+    //const [page, setPage] = useState(1);
+    //Lista de paginas
+    const [pages, setPages] = useState([1]);
+    const [thereIsAPage, setThereIsAPage] = useState(false);
+    //Indica se ha mais photos para serem carregadas
+    const [thereIsMore, setThereIsMore] = useState(true);
 
     useEffect(() => {
+        //Vou usar pra dar um tempo antes de poder renderizar mais photos
+        let wait = false
 
-        const fetchPhotos = async () => {
-            //Se estiver no home, o id deve ser 0 para renderizar todas as photos
-            //Caso contrario so deve renderizar as photos do user
-            let user;
-            home? user = 0 : user = data.id;
-
-            await API.PHOTOS_GET({ page: 1, total: 6, user })
-                .then(res => setPhotos(res))
-                .catch(e => setError(e.message))
-                .finally(setLoading(false));
+        const infiniteScroll = () => {
+            if (thereIsMore) {
+                //O quanto foi scrollados
+                const scroll = window.scrollY;
+                //A altura da pagina
+                const height = document.body.offsetHeight - window.innerHeight;
+                /* 
+                    Se o scroll for maior que 75% da pagina e nao estiver em espera (wait=false),
+                    entao pode carregar novas photos.
+                 */
+                if (scroll > height * .75 && !wait) {
+                    setPages((pages) => [...pages, pages.length + 1]);
+                    wait = true;
+                    //Espera 500ms antes de poder carregar novas photos
+                    setTimeout(() => wait = false, 500);
+                }
+            }
         }
 
-        fetchPhotos();
+        //Adicionando os listeners para o evento do scroll e de rolar do wheel do mouse
+        window.addEventListener('wheel', infiniteScroll);
+        window.addEventListener('scroll', infiniteScroll);
 
-    }, [home, data])
+        return () => {
+            //Removendo os listeners no dismount do component
+            window.removeEventListener('wheel', infiniteScroll);
+            window.removeEventListener('scroll', infiniteScroll);
+        };
+
+
+    }, [thereIsMore])
 
     return (
         <>
             {
                 modalPhoto && <PhotoModal photo={modalPhoto} setModalPhoto={setModalPhoto} />
             }
-            {
-                loading && <Loading />
+            {/**Eu nao queria fazer varias ul's diferentes. Porem, nao estava conseguindo encaixar as photos,
+             * sempre ficavam espacos. Entenda cada ul como uma pagina.
+            */}
+            {pages.map((page) => (
+                <FeedPhotos
+                    key={page}
+                    home={home}
+                    page={page}
+                    total={6}
+                    setModalPhoto={setModalPhoto}
+                    setThereIsMore={setThereIsMore}
+                    setThereIsAPage={setThereIsAPage}
+                />
+            ))}
+            {   
+                !thereIsMore && !thereIsAPage?
+                    <Fim> Não há postagens. Corre e compartilhe a fofura!</Fim>
+                    :
+                    (!thereIsMore && pages.length > 1)?
+                        <Fim> Não há mais postagens :(</Fim>
+                        :
+                        null
             }
-            {
-                 (!loading && photos) &&
-                 <FeedContainer className='animeLeft'>
-                     {
-                         photos.map((photo) => {
-                             return (<FeedItem key={photo.id} photo={photo} setModalPhoto={setModalPhoto} />)
-                         })
-                     }
-                     {
-                         error && <Error>{error}</Error>
-                     }
-                 </FeedContainer> 
-            }
+
         </>
     )
 }

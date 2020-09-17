@@ -9,7 +9,7 @@ export const UserContext = createContext();
 //Todos os components englobados por esse context terao acesso aos seus atributos e metodos
 export const UserStorage = ({ children }) => {
 
-    const [data, setData] = useState();
+    const [data, setData] = useState(null);
     const [login, setLogin] = useState(null);
     const [loading, setLoading] = useState(false);
     //const [error, setError] = useState(null);
