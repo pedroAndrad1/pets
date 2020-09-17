@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import ViewsBlackIcon from '../../../assets/visualizacao-black.svg';
-import { Link } from 'react-router-dom';
+import Image from '../../Image';
 
 /** Animation de entrada do modal, faz um efeito de crescimento */
 const scaleUp = keyframes`
@@ -82,7 +82,6 @@ export const Attributes = styled.ul`
     font-weight: 700;
     margin-top: 1rem;
     margin-bottom: 2rem;
-    
     & li{
         margin-right: 2rem;    
     }

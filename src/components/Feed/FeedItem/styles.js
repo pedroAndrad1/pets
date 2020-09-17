@@ -15,7 +15,7 @@ export const Item = styled.li`
 
      display: grid;
 
-    & img, & span{
+    & div, & span{
         grid-area: 1/1;
     }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from '../../Image';
 import { Visualizacoes, Item } from './styles';
 
 const FeedItem = ( {photo, setModalPhoto} ) =>{
@@ -10,7 +11,7 @@ const FeedItem = ( {photo, setModalPhoto} ) =>{
 
     return(
         <Item onClick={handleClick}>
-            <img src={photo.src} alt={photo.title}/>
+            <Image src={photo.src} alt={photo.title}/>
             <Visualizacoes>{photo.acessos}</Visualizacoes>
         </Item>
     )
