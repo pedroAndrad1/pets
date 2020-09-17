@@ -11,7 +11,7 @@ const RouteConta = props => {
     switch(login){
         //Se o user esta logado, ele pode acessar a conta
         case true:
-            return <Route {...props} />
+            return <Route {...props}/>
         //Caso nao esteja deve ir para login
         case false:
             history.push('/login');

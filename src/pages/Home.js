@@ -5,7 +5,7 @@ import Feed from '../components/Feed';
 function Home() {
   return (
     <Container>
-      <Feed />
+      <Feed home/>
     </Container>
   );
 }

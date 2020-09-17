@@ -110,6 +110,8 @@ const PHOTO_POST = async (formData, token) => {
 //Pega as photos
 const PHOTOS_GET = async ({ page, total, user }) => {
 
+    console.log(user);
+
     return await fetch(`${URL}/api/photo/?_page=${page}&_total=${total}&_user=${user}`, {
         method: 'GET',
         /*Para a foto poder aparecer logo dps de ser postada. Pois sera necessario uma nova consulta, 

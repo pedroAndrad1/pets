@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import FeedItem from './FeedItem';
 import { FeedContainer } from './styles';
 import Error from '../../utils/Error';
 import API from '../../API';
 import PhotoModal from './PhotoModal';
 import Loading from '../../utils/Loading';
+import { UserContext } from '../../UserContext';
 
 
-const Feed = () => {
+const Feed = ({home}) => {
+
+    const {data} = useContext(UserContext);
+    
+
 
     const [photos, setPhotos] = useState(null)
     const [error, setError] = useState(null)
@@ -22,8 +27,12 @@ const Feed = () => {
     useEffect(() => {
 
         const fetchPhotos = async () => {
+            //Se estiver no home, o id deve ser 0 para renderizar todas as photos
+            //Caso contrario so deve renderizar as photos do user
+            let user;
+            home? user = 0 : user = data.id;
 
-            await API.PHOTOS_GET({ page: 1, total: 6, user: 0 })
+            await API.PHOTOS_GET({ page: 1, total: 6, user })
                 .then(res => setPhotos(res))
                 .catch(e => setError(e.message))
                 .finally(setLoading(false));
@@ -31,7 +40,7 @@ const Feed = () => {
 
         fetchPhotos();
 
-    }, [])
+    }, [home, data])
 
     return (
         <>

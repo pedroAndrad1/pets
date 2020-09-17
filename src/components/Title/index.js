@@ -8,6 +8,7 @@ const StyledTitle = styled.h1`
     margin: 1rem 0;
     position: relative; /**Para ajeitar o after */
     z-index: 1 /**Para ficar em cima do after */;
+    word-break: break-word;
 
     &:after{
         content:'';
