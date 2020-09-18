@@ -6,7 +6,7 @@ import API from '../../../../API';
 import { CommentArea, SubmitButton } from './styles';
 
 
-const FormComment = ({ setComments, photoId }) => {
+const FormComment = ({ setComments, photoId, page }) => {
     
     const inputRef = useRef(null);
     const buttonRef = useRef(null);
@@ -45,7 +45,7 @@ const FormComment = ({ setComments, photoId }) => {
 
 
     return (
-        <CommentArea onSubmit={handleSubmit}>
+        <CommentArea onSubmit={handleSubmit} page={page}>
             <Input
                 as='textarea'
                 label='Comente aqui'

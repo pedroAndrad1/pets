@@ -11,7 +11,7 @@ const StyledUserHeader = styled.header`
     margin-bottom: 2rem;
     margin-top: 1rem;
     position: relative;
-    z-index: 1000;
+    z-index: 1;
 `
 
 

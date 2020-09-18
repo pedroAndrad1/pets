@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 export const CommentArea = styled.form`
 
@@ -6,6 +6,15 @@ export const CommentArea = styled.form`
     grid-template-columns: 1fr auto;
     align-items: stretch;
     margin: 1rem 1rem 0 1rem;
+
+    ${
+       ({page}) =>  {
+           return page && css`
+               margin: 1rem 0 0 0;
+               padding-left: 5px;
+           `
+       }
+   } 
 
 `
 const latir = keyframes`

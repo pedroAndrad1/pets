@@ -26,6 +26,14 @@ export const Img = styled.img`
     grid-area: 1/1;
     opacity: 0;
     transition: 0.2s;
+
+    ${
+       ({page}) =>  {
+           return page && css`
+                border-radius: .5rem;
+           `
+       }
+   } 
 `
 /**Uma animacao para dar a impressao de que o background do skeleton esta se movimentando,
  * passando uma ideia de carregamento.

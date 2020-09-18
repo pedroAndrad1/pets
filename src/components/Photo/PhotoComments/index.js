@@ -3,7 +3,7 @@ import { UserContext } from '../../../UserContext';
 import FormComment from './FormComment';
 import { CommentsSection } from './styles';
 
-const PhotoComments = ({ photoComments, photoId }) => {
+const PhotoComments = ({ photoComments, photoId, page }) => {
 
     const { login } = useContext(UserContext)
     const [comments, setComments] = useState(() => photoComments)
@@ -17,7 +17,7 @@ const PhotoComments = ({ photoComments, photoId }) => {
 
     return (
         <>
-            <CommentsSection ref={commentsSection}>
+            <CommentsSection page={page} ref={commentsSection}>
                 {
                     comments && comments.map(comment => {
                         return (
@@ -30,7 +30,7 @@ const PhotoComments = ({ photoComments, photoId }) => {
                 }
             </CommentsSection>
             {
-                login && <FormComment setComments={setComments} photoId= {photoId}/>
+                login && <FormComment setComments={setComments} photoId= {photoId} page={page}/>
             }
         </>
     )

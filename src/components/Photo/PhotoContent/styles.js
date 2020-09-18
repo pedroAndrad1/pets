@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import ViewsBlackIcon from '../../../assets/visualizacao-black.svg';
 
 /** Animation de entrada do modal, faz um efeito de crescimento */
@@ -26,6 +26,18 @@ export const ModalContainer = styled.div`
   transform: scale(0.8);
   animation: ${scaleUp} 0.3s forwards;
 
+   ${
+       ({page}) =>  {
+
+           return page && css`
+             grid-template-columns: 1fr;
+             height: auto;
+
+           `
+       }
+   } 
+
+
   @media (max-width: 64rem){
     height: auto;
     max-height: calc(100vh - 4rem);
@@ -34,19 +46,26 @@ export const ModalContainer = styled.div`
   }
 
 `
-/*
-export const Photo = styled.img`
-    /**Para ocupar as tres linhas do grid 
-    grid-row: 1/4;
-
-    @media (max-width: 64rem){
-        grid-row: 1;
-     }
-`
-*/
 
 export const Details = styled.div`
     padding: 1.5rem 1.5rem 0 2rem;
+
+    ${
+       ({page}) =>  {
+           return page && css`
+               padding: 1rem 0 0 0;
+                & p{
+                    width: 100%
+                }
+                @media (max-width: 64rem){
+                    & p{
+                        width: 90%
+                    }
+                }
+           `
+       }
+   } 
+
 
 `
 export const Author = styled.p`
@@ -55,10 +74,6 @@ export const Author = styled.p`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    @media (max-width: 64rem){
-        width: 80%;
-  }
 
 `
 

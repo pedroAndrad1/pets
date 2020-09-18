@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const CommentsSection = styled.ul`
     padding: 0 2rem;
@@ -7,5 +7,12 @@ export const CommentsSection = styled.ul`
     /**Para nao crescer para a direita e sim quebrar o texto */
     word-break: break-word;
     
+    ${
+       ({page}) =>  {
+           return page && css`
+               padding: 5px 0 0 0;
+           `
+       }
+   } 
 
 `

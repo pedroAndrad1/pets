@@ -7,15 +7,15 @@ import { UserContext } from '../../../UserContext';
 import DeleteButton from '../DeleteButton';
 import Image from '../../Image';
 
-const PhotoContent = ({ photoData }) => {
+const PhotoContent = ({ photoData, page }) => {
 
     const { photo, comments } = photoData;
     const { data } = useContext(UserContext);
 
     return (
-        <ModalContainer>
-            <Image modalPhoto src={photo.src} alt={photo.alt} />
-            <Details>
+        <ModalContainer page={page}>
+            <Image page={page} src={photo.src} alt={photo.alt} />
+            <Details page={page}>
                 <Author>
                     {   
                         //O user esta logada e tbm e o author da photo?
@@ -31,7 +31,7 @@ const PhotoContent = ({ photoData }) => {
                 <Title>
                     <Link to={`/foto/${photo.id}`}>{photo.title}</Link>
                 </Title>
-                <Attributes>
+                <Attributes page={page}>
                     <li>{photo.peso} Kg</li>
                      { photo.idade > 1? 
                         <li>{photo.idade} anos</li> 
@@ -40,7 +40,7 @@ const PhotoContent = ({ photoData }) => {
                     }
                 </Attributes>
             </Details>
-            <PhotoComments photoComments = {comments} photoId = {photo.id} />
+            <PhotoComments photoComments = {comments} photoId = {photo.id} page={page} />
         </ModalContainer>
     )
 
