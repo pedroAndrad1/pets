@@ -19,9 +19,7 @@ const PhotoModal = ( {photo, setModalPhoto} ) => {
      */
 
     useEffect( () => {
-
-        console.log(photo.id)
-
+        
         const fetch = async () => {
             
             setLoading(true);

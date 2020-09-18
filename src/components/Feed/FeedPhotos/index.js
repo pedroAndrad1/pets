@@ -9,14 +9,12 @@ import { FeedContainer } from './styles';
 
 const FeedPhotos = ({home, userName, page, total, setModalPhoto, setThereIsMore, setThereIsAPage}) => {
 
-    const {data} = useContext(UserContext);
+    const {data, loading, autoLoginIsHappening} = useContext(UserContext);
     const [photos, setPhotos] = useState([])
     const [error, setError] = useState(null)
     /*Estou fazendo o loading aqui pq estava tendo problemas de loop infinito no useEfect 
       com uma funcao getPhotos do UserContext que usa a funcao PHOTOS_GET. Entao vou fazer a logica dela aqui.
     */
-    const [loading, setLoading] = useState(true);
-
 
 
     useEffect(() => {
@@ -48,18 +46,16 @@ const FeedPhotos = ({home, userName, page, total, setModalPhoto, setThereIsMore,
                     }
                 })
                 .catch(e => setError(e.message))
-                .finally(setLoading(false));
         }
 
-        /*Fazer esse if evita que no carregamento da pagina, na home, esse fetch seja feito duas vezes.
-          Pq ele sera feito no carregamento, onde o data sera null pois ainda nao foi validado o user e
-          depois da validacao do user. Porque o valor de data tera sido modificado.
+        /*Fazer esse if evita que no carregamento da pagina seja feito duas vezes.
+          Porque ele so ocorrera depois da verificacao se o user esta logado ou nao.
         */
-        if(data != null || home || userName){
+        if(autoLoginIsHappening === false ){
             fetchPhotos();
         }
 
-    }, [home, data, page, total, setThereIsMore, setThereIsAPage, userName])
+    }, [home, data, page, total, setThereIsMore, setThereIsAPage, userName, autoLoginIsHappening])
 
     return (
         <>

@@ -11,7 +11,8 @@ export const UserStorage = ({ children }) => {
 
     const [data, setData] = useState(null);
     const [login, setLogin] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(null);
+    const [autoLoginIsHappening, setAutoLoginIsHappening] = useState(null);
     //const [error, setError] = useState(null);
     const history = useHistory();
 
@@ -41,24 +42,32 @@ export const UserStorage = ({ children }) => {
         //Estou criando a funcao aqui para poder usar o async/await
         const autoLogin = async () => {
             const token = window.localStorage.getItem('token');
+            setLoading(true);
+            setAutoLoginIsHappening(true);
 
+            console.log('comecou o autoLogin')
             if (token) {
 
                 //setError(null);
-                setLoading(true);
 
                await API.TOKEN_VALIDATE_POST(token)
-                    .then(res => {
-                        res ? tokenLogin(token) : userLogout()
+                    .then( async res => {
+                        //Tem que esperar o token login setar o data, senao o feed vai carregar a pag 1 duas vezes
+                        res ? await tokenLogin(token) : userLogout()
                     })
-                    .finally(() => setLoading(false))
+                    .finally(() => {
+                        setLoading(false);
+                        setAutoLoginIsHappening(false);  
+                    })
             }else{
                 setLogin(false);
+                setLoading(false)
+                setAutoLoginIsHappening(false);
             }
         }
 
         //Chamando a funcao
-        autoLogin();
+       autoLogin();
 
     }, [tokenLogin])
 
@@ -78,7 +87,6 @@ export const UserStorage = ({ children }) => {
             .then(res => {
                 setData(res);
                 setLogin(true);
-                console.log(res)
                 history.push('/conta')
             })
             .catch(e => {
@@ -180,7 +188,9 @@ export const UserStorage = ({ children }) => {
     */
 
     return (
-        <UserContext.Provider value={{ userLogin, userLogout, createUser, photoPost, data, login, loading }}>
+        <UserContext.Provider 
+            value={{ userLogin, userLogout, createUser, photoPost, autoLoginIsHappening, data, login, loading }}
+        >
             {children}
         </UserContext.Provider>
     )

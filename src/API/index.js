@@ -16,8 +16,6 @@ const TOKEN_POST = (username, password) => {
                 return json;
             }
             else {
-                const json = await resposta.json();
-                console.log(json)
                 throw Error('Nome de usuário desconhecido. Verifique novamente ou tente seu endereço de e-mail.');
             }
         })
@@ -25,9 +23,9 @@ const TOKEN_POST = (username, password) => {
 
 
 //Retorna um user
-const GET_USER = (token) => {
+const GET_USER = async (token) => {
 
-    return fetch(`${URL}/api/user`, {
+    return await fetch(`${URL}/api/user`, {
         method: 'GET',
         headers: {
             Authorization: 'Bearer ' + token
@@ -41,16 +39,15 @@ const GET_USER = (token) => {
                 return json;
             }
             else {
-                console.log(json)
                 throw Error(json.message);
             }
         })
 }
 
 //Valida o token
-const TOKEN_VALIDATE_POST = token => {
+const TOKEN_VALIDATE_POST = async token => {
 
-    return fetch(`${URL}/jwt-auth/v1/token/validate`, {
+    return await fetch(`${URL}/jwt-auth/v1/token/validate`, {
         method: 'POST',
         headers: {
             Authorization: 'Bearer ' + token
@@ -78,10 +75,8 @@ const USER_POST = (username, email, password) => {
             const json = await resposta.json()
 
             if (resposta.ok) {
-                console.log(json);
                 return json;
             } else {
-                console.log(json);
                 throw Error(json.message)
             }
         })
@@ -99,7 +94,6 @@ const PHOTO_POST = async (formData, token) => {
     })
         .then(async resposta => {
             const json = await resposta.json()
-            console.log(json);
 
             if (!resposta.ok) {
                 throw Error(json.message);
@@ -110,8 +104,6 @@ const PHOTO_POST = async (formData, token) => {
 //Pega as photos
 const PHOTOS_GET = async ({ page, total, user }) => {
 
-    console.log(user);
-
     return await fetch(`${URL}/api/photo/?_page=${page}&_total=${total}&_user=${user}`, {
         method: 'GET',
         /*Para a foto poder aparecer logo dps de ser postada. Pois sera necessario uma nova consulta, 
@@ -120,8 +112,6 @@ const PHOTOS_GET = async ({ page, total, user }) => {
     })
         .then(async res => {
             const json = await res.json();
-            console.log(json);
-
             if (res.ok) {
                 return json;
             } else {
@@ -191,7 +181,6 @@ const PHOTO_DELETE = async id => {
         .then(async res => {
 
             const json = await res.json();
-            console.log(json);
 
             if (res.ok) {
                 return json;
