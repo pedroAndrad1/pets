@@ -59,7 +59,7 @@ const PhotoModal = ( {photo, setModalPhoto} ) => {
         <Modal onClick={handleOutsideClick}>
             {error && <Error>{error}</Error>}
             {loading && <Loading />}
-            {photoData && <PhotoContent photoData={photoData}/>}
+            {photoData && <PhotoContent modalPhoto photoData={photoData}/>}
         </Modal>
     )
 }

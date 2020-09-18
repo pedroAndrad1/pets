@@ -16,12 +16,10 @@ export const ModalContainer = styled.div`
   border-radius: 0.2rem;
   background: white;
   display: grid;
-  /**A foto vaqi ficar na primeira coluna */
+  /**A foto vai ficar na primeira coluna */
   grid-template-columns: 36rem 20rem;
   /** Os comments vao ficar na segunda linha */
   grid-template-rows: auto 1fr auto;
-  /**Para ter um scroll da comments */
-  overflow: hidden;
   opacity: 0;
   transform: scale(0.8);
   animation: ${scaleUp} 0.3s forwards;

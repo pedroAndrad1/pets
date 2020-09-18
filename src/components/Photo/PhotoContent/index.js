@@ -7,14 +7,14 @@ import { UserContext } from '../../../UserContext';
 import DeleteButton from '../DeleteButton';
 import Image from '../../Image';
 
-const PhotoContent = ({ photoData, page }) => {
+const PhotoContent = ({ photoData, page, modalPhoto }) => {
 
     const { photo, comments } = photoData;
     const { data } = useContext(UserContext);
 
     return (
         <ModalContainer page={page}>
-            <Image page={page} src={photo.src} alt={photo.alt} />
+            <Image page={page} modalPhoto={modalPhoto} src={photo.src} alt={photo.alt} />
             <Details page={page}>
                 <Author>
                     {   

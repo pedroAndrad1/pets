@@ -6,6 +6,11 @@ export const CommentsSection = styled.ul`
     overflow-y: auto;
     /**Para nao crescer para a direita e sim quebrar o texto */
     word-break: break-word;
+
+    & li {
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
     
     ${
        ({page}) =>  {
