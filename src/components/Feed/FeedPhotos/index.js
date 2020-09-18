@@ -7,7 +7,7 @@ import FeedItem from '../FeedItem';
 import { FeedContainer } from './styles';
 
 
-const FeedPhotos = ({home, page, total, setModalPhoto, setThereIsMore, setThereIsAPage}) => {
+const FeedPhotos = ({home, userName, page, total, setModalPhoto, setThereIsMore, setThereIsAPage}) => {
 
     const {data} = useContext(UserContext);
     const [photos, setPhotos] = useState([])
@@ -23,11 +23,16 @@ const FeedPhotos = ({home, page, total, setModalPhoto, setThereIsMore, setThereI
 
         const fetchPhotos = async () => {
             //Se estiver no home, o id deve ser 0 para renderizar todas as photos
-            //Caso contrario so deve renderizar as photos do user
+            //Caso contrario so deve renderizar as photos do user.
             let user;
-            home? user = 0 : user = data.id;
+            //Fiz um safe navigation pra so buscar o id se tiver data. Isso impede de ocorrer um NullPointer
+            //Na situacao de eu tentar acessar um profile (home=false && userName="nome_do_user") sem estar logado.
+            home? user = 0 : user = data?.id; 
+            //O user pode ser tanto o id ou o userName. Se for passado um userName, entao
+            //e pra pegar so as photos desse userName.
+            if(userName) user = userName;
 
-            await API.PHOTOS_GET({ page, total, user })
+            await API.PHOTOS_GET({ page, total, user})
                 .then(res => {
                     setPhotos( act => {
                         return act.concat(res);
@@ -50,11 +55,11 @@ const FeedPhotos = ({home, page, total, setModalPhoto, setThereIsMore, setThereI
           Pq ele sera feito no carregamento, onde o data sera null pois ainda nao foi validado o user e
           depois da validacao do user. Porque o valor de data tera sido modificado.
         */
-        if(data != null){
+        if(data != null || home || userName){
             fetchPhotos();
         }
 
-    }, [home, data, page, total, setThereIsMore, setThereIsAPage])
+    }, [home, data, page, total, setThereIsMore, setThereIsAPage, userName])
 
     return (
         <>

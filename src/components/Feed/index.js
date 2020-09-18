@@ -4,7 +4,7 @@ import FeedPhotos from './FeedPhotos';
 import { Fim } from './styles';
 
 
-const Feed = ({ home }) => {
+const Feed = ({ home, userName }) => {
 
     const [modalPhoto, setModalPhoto] = useState(null);
     //const [page, setPage] = useState(1);
@@ -62,6 +62,7 @@ const Feed = ({ home }) => {
                 <FeedPhotos
                     key={page}
                     home={home}
+                    userName={userName}
                     page={page}
                     total={6}
                     setModalPhoto={setModalPhoto}

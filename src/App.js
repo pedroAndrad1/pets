@@ -7,6 +7,7 @@ import { UserStorage } from './UserContext';
 import RouteConta from './utils/protected-route/RouteConta';
 import userRouting from './pages/user/userRouting';
 import Photo from './pages/Photo';
+import UserProfile from './pages/user/UserProfile';
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
                             <Route path="/login" component={LoginRouting} />
                             <RouteConta path='/conta' component={userRouting}/>
                             <Route path='/foto/:id' component={Photo} />
+                            <Route path='/perfil/:userName' component={UserProfile} />
                         </Switch>
                     </PageRoot>
                 </UserStorage>
