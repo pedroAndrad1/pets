@@ -28,10 +28,10 @@ const StyledTitle = styled.h1`
     }
 `
 
-const Title = ({ children }) => {
+const Title = ({ children, props }) => {
 
     return (
-        <StyledTitle>
+        <StyledTitle {...props}>
             {children}
         </StyledTitle>
     )

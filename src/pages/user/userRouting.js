@@ -4,7 +4,7 @@ import Container from '../../components/Container';
 import Feed from '../../components/Feed';
 import UserStats from './UserStats';
 import UserPhotoPost from './UserPhotoPost';
-import UserHeader from '../../components/UserHeader';
+import Page404 from '../Page404';
 
 
 const userRouting = () => {
@@ -14,11 +14,11 @@ const userRouting = () => {
     */
     return (
         <Container>
-            <UserHeader />
             <Switch>
                 <Route path='/conta' exact component={Feed}/>
                 <Route path='/conta/estatisticas' component={UserStats} />
                 <Route path='/conta/postar' component={UserPhotoPost} />
+                <Route path='*' component={Page404} />
             </Switch>
         </Container>
     )

@@ -7,10 +7,11 @@ import { useHistory } from 'react-router-dom';
 import { PerdeuSenha, SubTitle, Cadastro } from './styles';
 import Title from '../../../components/Title';
 import Error from '../../../utils/Error';
+import LoginTemplate from '../../../components/LoginTemplate';
 
 const LoginForm = () => {
 
-    const { userLogin, loading, login} = useContext(UserContext);
+    const { userLogin, loading, login } = useContext(UserContext);
     const history = useHistory();
     const [error, setError] = useState(null);
 
@@ -24,52 +25,54 @@ const LoginForm = () => {
         event.preventDefault();
 
         //Validando form
-        if (userName.validate() && password.validate()){
+        if (userName.validate() && password.validate()) {
 
-          const erro = await userLogin(userName.value, password.value);
-          
-          console.log(erro)
-          setError(erro)
-            
+            const erro = await userLogin(userName.value, password.value);
+
+            console.log(erro)
+            setError(erro)
+
         }
 
     }
 
     return (
-        <section className='animeLeft'>
-            <Title>Login</Title>
-            <form onSubmit={handleSubmit} className='form'>
-                <Input
-                    label='Usuário'
-                    name='user'
-                    type='text'
-                    {...userName} />
-                <Input
-                    label='Senha'
-                    name='password'
-                    type='password'
-                    {...password} />
+        <LoginTemplate>
+            <section className='animeLeft'>
+                <Title>Login</Title>
+                <form onSubmit={handleSubmit} className='form'>
+                    <Input
+                        label='Usuário'
+                        name='user'
+                        type='text'
+                        {...userName} />
+                    <Input
+                        label='Senha'
+                        name='password'
+                        type='password'
+                        {...password} />
+                    {
+                        loading ?
+                            <Button disabled>Carregando</Button>
+                            :
+                            <Button>Entrar</Button>
+                    }
+                </form>
                 {
-                    loading ?
-                        <Button disabled>Carregando</Button>
-                        :
-                        <Button>Entrar</Button>
-                }
-            </form>
-            {
-                error &&
+                    error &&
                     <Error>{error}</Error>
-            }
-            <PerdeuSenha to='login/recuperar-senha'>Perdeu a Senha?</PerdeuSenha>
-            <Cadastro>
-                <SubTitle>Cadastre-se</SubTitle>
-                <p style={{ margin: '2rem 0' }}>
-                    Ainda não possui uma conta? Cadastre-se e
-                    compartilhe dessa overdose de fofura!
+                }
+                <PerdeuSenha to='login/recuperar-senha'>Perdeu a Senha?</PerdeuSenha>
+                <Cadastro>
+                    <SubTitle>Cadastre-se</SubTitle>
+                    <p style={{ margin: '2rem 0' }}>
+                        Ainda não possui uma conta? Cadastre-se e
+                        compartilhe dessa overdose de fofura!
                 </p>
-                <Button link to='login/cadastro'>Cadastro</Button>
-            </Cadastro>
-        </section>
+                    <Button link to='login/cadastro'>Cadastro</Button>
+                </Cadastro>
+            </section>
+        </LoginTemplate>
     )
 }
 export default LoginForm;

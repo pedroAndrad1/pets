@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PhotoModal from './PhotoModal';
 import FeedPhotos from './FeedPhotos';
 import { Fim } from './styles';
+import UserHeader from '../UserHeader';
 
 
 const Feed = ({ home, userName }) => {
@@ -53,6 +54,11 @@ const Feed = ({ home, userName }) => {
     return (
         <>
             {
+             /**O UserHeader so e mostrado se nao for a home e se nao for a pagina de um profile */
+             (!home && !userName) && 
+                <UserHeader />
+            }
+            {
                 modalPhoto && <PhotoModal photo={modalPhoto} setModalPhoto={setModalPhoto} />
             }
             {/**Eu nao queria fazer varias ul's diferentes. Porem, nao estava conseguindo encaixar as photos,
@@ -70,11 +76,11 @@ const Feed = ({ home, userName }) => {
                     setThereIsAPage={setThereIsAPage}
                 />
             ))}
-            {   
-                !thereIsMore && !thereIsAPage?
+            {
+                !thereIsMore && !thereIsAPage ?
                     <Fim> Não há postagens. Corre e compartilhe a fofura!</Fim>
                     :
-                    (!thereIsMore && pages.length > 1)?
+                    (!thereIsMore && pages.length > 1) ?
                         <Fim> Não há mais postagens :(</Fim>
                         :
                         null

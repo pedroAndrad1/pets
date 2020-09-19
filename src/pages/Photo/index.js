@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import API from '../../API';
 import Container from '../../components/Container';
 import PhotoContent from '../../components/Photo/PhotoContent';
-import Error from '../../utils/Error';
 import Loading from '../../utils/Loading';
+import Page404 from '../Page404';
 
 const Photo = () => {
     const {id} = useParams(null);
@@ -24,7 +24,7 @@ const Photo = () => {
                     setPhoto(res);
                 })
                 .catch( e => {
-                   setError(e.message);
+                   setError(<Page404 />)
                 })
             
             setLoading(false);
@@ -41,7 +41,7 @@ const Photo = () => {
 
     return(
         <Container>
-             {error && <Error>{error}</Error>}
+             {error && error}
              {loading && <Loading />}
              {photo && <PhotoContent page photoData={photo}/>}
         </Container>

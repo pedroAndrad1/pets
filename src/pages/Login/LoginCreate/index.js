@@ -5,11 +5,12 @@ import useForm from '../../../hooks/useForm';
 import Button from '../../../components/Button';
 import { UserContext } from '../../../UserContext';
 import Error from '../../../utils/Error';
+import LoginTemplate from '../../../components/LoginTemplate';
 
 
 const LoginCreate = () => {
 
-    const { loading, createUser} = useContext(UserContext);
+    const { loading, createUser } = useContext(UserContext);
 
     const userName = useForm();
     const email = useForm('email');
@@ -20,7 +21,7 @@ const LoginCreate = () => {
         event.preventDefault();
 
         //Validando form
-        if (userName.validate() && email.validate() && password.validate()){
+        if (userName.validate() && email.validate() && password.validate()) {
             const res = await createUser(userName.value, email.value, password.value);
             setError(res);
         }
@@ -28,39 +29,41 @@ const LoginCreate = () => {
     }
 
     return (
-        <section className='animeLeft'>
-            <Title>Cadastro</Title>
-            <form onSubmit={handleSubmit} className='form'>
-                <Input
-                    label='Usuário'
-                    type='text'
-                    name='user'
-                    {...userName}
-                />
-                <Input
-                    label='Email'
-                    type='email'
-                    name='email'
-                    {...email}
-                />
-                <Input
-                    label='Senha'
-                    type='password'
-                    name='password'
-                    {...password}
-                />
-                {
-                    loading ?
-                        <Button disabled>Carregando</Button>
-                        :
-                        <Button>Cadastrar </Button>
-                }
-                {
-                    error && <Error>{error}</Error>
-                }
+        <LoginTemplate>
+            <section className='animeLeft'>
+                <Title>Cadastro</Title>
+                <form onSubmit={handleSubmit} className='form'>
+                    <Input
+                        label='Usuário'
+                        type='text'
+                        name='user'
+                        {...userName}
+                    />
+                    <Input
+                        label='Email'
+                        type='email'
+                        name='email'
+                        {...email}
+                    />
+                    <Input
+                        label='Senha'
+                        type='password'
+                        name='password'
+                        {...password}
+                    />
+                    {
+                        loading ?
+                            <Button disabled>Carregando</Button>
+                            :
+                            <Button>Cadastrar </Button>
+                    }
+                    {
+                        error && <Error>{error}</Error>
+                    }
 
-            </form>
-        </section>
+                </form>
+            </section>
+        </LoginTemplate>
     )
 }
 export default LoginCreate;

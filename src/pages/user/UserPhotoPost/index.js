@@ -5,6 +5,7 @@ import Button from '../../../components/Button';
 import useForm from '../../../hooks/useForm'
 import { UserContext } from '../../../UserContext';
 import Error from '../../../utils/Error';
+import UserHeader from '../../../components/UserHeader';
 
 const UserPhotoPost = () => {
 
@@ -56,8 +57,10 @@ const UserPhotoPost = () => {
     }
 
     return (
-        <PostContainer className='animeLeft'>
-           
+        <>
+            <UserHeader />
+            <PostContainer className='animeLeft'>
+
                 <form onSubmit={handleSubmit} >
                     <Input label='Nome' {...nome} />
                     <Input label='Idade' {...idade} />
@@ -70,11 +73,12 @@ const UserPhotoPost = () => {
                         error && <Error>{error}</Error>
                     }
                 </form>
-            
-            {
-                img.preview && <Preview img={img.preview} />
-            }
-        </PostContainer>
+
+                {
+                    img.preview && <Preview img={img.preview} />
+                }
+            </PostContainer>
+        </>
     )
 }
 export default UserPhotoPost;
