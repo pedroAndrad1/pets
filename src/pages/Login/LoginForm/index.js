@@ -8,6 +8,7 @@ import { PerdeuSenha, SubTitle, Cadastro } from './styles';
 import Title from '../../../components/Title';
 import Error from '../../../utils/Error';
 import LoginTemplate from '../../../components/LoginTemplate';
+import Head from '../../../utils/Head';
 
 const LoginForm = () => {
 
@@ -38,6 +39,7 @@ const LoginForm = () => {
 
     return (
         <LoginTemplate>
+            <Head title='Login'/>
             <section className='animeLeft'>
                 <Title>Login</Title>
                 <form onSubmit={handleSubmit} className='form'>

@@ -6,6 +6,7 @@ import Button from '../../../components/Button';
 import { UserContext } from '../../../UserContext';
 import Error from '../../../utils/Error';
 import LoginTemplate from '../../../components/LoginTemplate';
+import Head from '../../../utils/Head';
 
 
 const LoginCreate = () => {
@@ -30,6 +31,7 @@ const LoginCreate = () => {
 
     return (
         <LoginTemplate>
+            <Head title='Cadastro'/>
             <section className='animeLeft'>
                 <Title>Cadastro</Title>
                 <form onSubmit={handleSubmit} className='form'>

@@ -18,8 +18,8 @@ const StyledTitle = styled.h1`
         background: #fb1;
         position: absolute;
         bottom: 5px;
-        left: -5px;
-        border-radius: .5rem;
+        left: 3px;
+        border-radius: .2rem;
         z-index: -1;
     }
 

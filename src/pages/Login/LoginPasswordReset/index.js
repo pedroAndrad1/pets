@@ -7,6 +7,7 @@ import useForm from '../../../hooks/useForm';
 import API from '../../../API';
 import { useHistory } from 'react-router-dom';
 import { Error } from '../../../components/Input/styles';
+import Head from '../../../utils/Head';
 
 const LoginPasswordReset = () => {
 
@@ -45,6 +46,7 @@ const LoginPasswordReset = () => {
 
     return (
         <LoginTemplate>
+            <Head title='Nova senha'/>
             <section className='animeLeft'>
                 <Title>Mudança de senha</Title>
                 <form onSubmit={handleSubmit}>

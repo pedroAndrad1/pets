@@ -6,6 +6,7 @@ import Button from '../../../components/Button';
 import useForm from '../../../hooks/useForm';
 import API from '../../../API';
 import { Error } from '../../../components/Input/styles';
+import Head from '../../../utils/Head';
 
 //Um email sera enviado para resetar a senha da cota
 
@@ -36,8 +37,7 @@ const LoginPasswordLost = () => {
     return (
         <LoginTemplate>
             <section className='animeLeft'>
-
-
+                <Head title='Recuperar senha'/>
                 <Title>Perdeu a senha?</Title>
                 {
                     ok ?

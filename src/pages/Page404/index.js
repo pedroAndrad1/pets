@@ -4,6 +4,7 @@ import Image from '../../components/Image';
 import styled from 'styled-components';
 import bg from '../../assets/404.jpg'
 import {NavLink } from 'react-router-dom';
+import Head from '../../utils/Head';
 
 const Wrapper = styled.div`
     display: flex;
@@ -22,6 +23,7 @@ const Page404 = () => {
 
     return (
         <Container>
+            <Head title='Pagína não encontrada'/>
             <Wrapper>
                 <Image src={bg}/>
                 <Text>Parece que a bolinha não está aqui :(. Vamos procurar por <NavLink to='/' style={{textDecoration:'underline', padding:0}}>aqui!</NavLink></Text>

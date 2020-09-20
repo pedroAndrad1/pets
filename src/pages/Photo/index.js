@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import API from '../../API';
 import Container from '../../components/Container';
 import PhotoContent from '../../components/Photo/PhotoContent';
+import Head from '../../utils/Head';
 import Loading from '../../utils/Loading';
 import Page404 from '../Page404';
 
@@ -41,6 +42,7 @@ const Photo = () => {
 
     return(
         <Container>
+             {photo && <Head title={photo.photo.title}/>}
              {error && error}
              {loading && <Loading />}
              {photo && <PhotoContent page photoData={photo}/>}

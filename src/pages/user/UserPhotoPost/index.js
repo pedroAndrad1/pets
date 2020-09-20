@@ -6,6 +6,7 @@ import useForm from '../../../hooks/useForm'
 import { UserContext } from '../../../UserContext';
 import Error from '../../../utils/Error';
 import UserHeader from '../../../components/UserHeader';
+import Head from '../../../utils/Head';
 
 const UserPhotoPost = () => {
 
@@ -57,7 +58,8 @@ const UserPhotoPost = () => {
     }
 
     return (
-        <>
+        <>  
+            <Head title='Poste uma foto' />
             <UserHeader />
             <PostContainer className='animeLeft'>
 
