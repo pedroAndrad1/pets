@@ -16,7 +16,7 @@ const LoginRouting = () => {
                 <Route path='/login' exact component={LoginForm} />
                 <Route path='/login/cadastro' component={LoginCreate} />
                 <Route path='/login/recuperar-senha' component={LoginPasswordLost} />
-                <Route path='/login/reset' component={LoginPasswordReset} />
+                <Route path='/login/nova-senha' component={LoginPasswordReset} />
                 <Route path='*' component={Page404} />
             </Switch>
     )

@@ -20,9 +20,9 @@ const LoginPasswordLost = () => {
         event.preventDefault();
 
         if (login.validate()) {
-            
+
             setLoading(true);
-            await API.PASSWORD_LOST(login.value, window.location.href.replace('perdeu', 'resetar'))
+            await API.PASSWORD_LOST(login.value, window.location.href.replace('recuperar-senha', 'nova-senha'))
                 .then(() => {
                     setOk(true)
                 })
@@ -35,22 +35,28 @@ const LoginPasswordLost = () => {
 
     return (
         <LoginTemplate>
-            <Title>Perdeu a senha?</Title>
-            {
-                ok ?
-                    <p style={{ color: '#4c1' }}>Email para recuperação a senha enviado com sucesso!</p>
-                    :
-                    <form onSubmit={handleSubmit}>
-                        <Input label='Usuário ou Email' {...login} placeholder='Preencha aqui...' />
-                        {
-                            loading ? <Button>Enviando</Button> : <Button>Enviar email</Button>
-                        }
-                        {
-                            <Error>{error}</Error>
-                        }
-                    </form>
-            }
+            <section className='animeLeft'>
 
+
+                <Title>Perdeu a senha?</Title>
+                {
+                    ok ?
+                        <p style={{ color: '#4c1' }}>Email para recuperação de senha enviado com sucesso!</p>
+                        :
+                        <form onSubmit={handleSubmit}>
+                            <Input label='Usuário ou Email' {...login} type='email'  />
+                            {
+                                loading ?
+                                    <Button type='submit' disabled>Enviando...</Button>
+                                    :
+                                    <Button type='submit'>Enviar email</Button>
+                            }
+                            {
+                                <Error>{error}</Error>
+                            }
+                        </form>
+                }
+            </section>
         </LoginTemplate>
     )
 }

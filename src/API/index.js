@@ -201,6 +201,25 @@ const PASSWORD_LOST = async (login, url) => {
     })
     .then(async res => {
         const json = await res.json();
+        
+        if(res.ok){
+            return json;
+        }else{
+            throw new Error(json.message);
+        }
+    })
+}
+//Reseta senha
+const PASSWORD_RESET = async (login, key, password) => {
+    return await fetch(`${URL}/api/password/reset`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify({login, key, password})
+    })
+    .then(async res => {
+        const json = await res.json();
         console.log(json);
         
         if(res.ok){
@@ -221,5 +240,6 @@ export default {
     PHOTO_GET,
     COMMENT_POST,
     PHOTO_DELETE,
-    PASSWORD_LOST
+    PASSWORD_LOST,
+    PASSWORD_RESET
 }
