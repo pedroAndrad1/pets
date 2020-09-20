@@ -190,6 +190,26 @@ const PHOTO_DELETE = async id => {
         })
 }
 
+//Envia um email para resetar senha
+const PASSWORD_LOST = async (login, url) => {
+    return await fetch(`${URL}/api/password/lost`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify({login, url})
+    })
+    .then(async res => {
+        const json = await res.json();
+        console.log(json);
+        
+        if(res.ok){
+            return json;
+        }else{
+            throw new Error(json.message);
+        }
+    })
+}
 
 export default {
     TOKEN_POST,
@@ -200,5 +220,6 @@ export default {
     PHOTOS_GET,
     PHOTO_GET,
     COMMENT_POST,
-    PHOTO_DELETE
+    PHOTO_DELETE,
+    PASSWORD_LOST
 }
