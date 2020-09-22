@@ -29,6 +29,10 @@ const FormContainer = styled.div`
     max-width: 30rem;
     padding: 3rem;
     margin-top: 15vh;
+
+    @media(max-width: 40rem){
+        margin-top: 5vh;
+    }
 `
 
 const LoginTemplate = ({ children }) => {

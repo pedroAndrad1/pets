@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 const Head = ({ title, description }) => {
 
     useEffect(() => {
-        document.title = 'Dogs | ' + title;
+        document.title = 'Pets | ' + title;
         //Pegando a tag de no meta com o name de description e alterando o content
         document
             .querySelector("meta[name='description']")
