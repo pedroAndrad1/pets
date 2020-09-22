@@ -17,7 +17,7 @@ const validations = {
 }
 
 /**Hook para formulario */
-const useForm = (validation) => {
+function useForm(validation){
     
 
     const [value, setValue] = useState('');
