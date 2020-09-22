@@ -209,6 +209,7 @@ const PASSWORD_LOST = async (login, url) => {
         }
     })
 }
+
 //Reseta senha
 const PASSWORD_RESET = async (login, key, password) => {
     return await fetch(`${URL}/api/password/reset`,{
@@ -230,6 +231,26 @@ const PASSWORD_RESET = async (login, key, password) => {
     })
 }
 
+//Pega as estatisticas de um user
+const STATS_GET = async () => {
+   
+    return await fetch(`${URL}/api/stats`,{
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+        },
+    })
+    .then(async res => {
+        const json = await res.json();
+        console.log(json);
+        
+        if(res.ok){
+            return json;
+        }else{
+            throw new Error(json.message);
+        }
+    })
+  }
 export default {
     TOKEN_POST,
     GET_USER,
@@ -241,5 +262,6 @@ export default {
     COMMENT_POST,
     PHOTO_DELETE,
     PASSWORD_LOST,
-    PASSWORD_RESET
+    PASSWORD_RESET,
+    STATS_GET
 }

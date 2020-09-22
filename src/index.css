@@ -40,7 +40,8 @@ img {
     display: flex;
     flex-direction: column;
     /*Para sempre ocupar a toda a tela, tirando o padding do top*/
-    min-height: calc(100vh - var(--body-padding-top));
+    /*Somei +10rem para o footer nao aparecer quando carrega a pagina pra dps pular mais pra baixo da tela */
+    min-height: calc(100vh + 10rem);
   
   }
 
@@ -60,4 +61,13 @@ img {
 
 .form{
     margin-bottom: 2rem;
+}
+
+/*Para poder alinhas o conteudo dos graphs ao centro. Um graph e um svg que tem, entre outras, essa prop, 
+  que inicialmente tem o height: 100%
+
+  O !important e pra ter certeza que vai sobrescrever a prop
+*/
+.VictoryContainer {
+  height: initial !important;
 }

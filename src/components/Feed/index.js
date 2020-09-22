@@ -3,6 +3,7 @@ import PhotoModal from './PhotoModal';
 import FeedPhotos from './FeedPhotos';
 import { Fim } from './styles';
 import UserHeader from '../UserHeader';
+import Head from '../../utils/Head';
 
 
 const Feed = ({ home, userName }) => {
@@ -54,9 +55,13 @@ const Feed = ({ home, userName }) => {
     return (
         <>
             {
-             /**O UserHeader so e mostrado se nao for a home e se nao for a pagina de um profile */
-             (!home && !userName) && 
-                <UserHeader />
+                /**O UserHeader so e mostrado se nao for a home e se nao for a pagina de um profile */
+                (!home && !userName) &&
+                <>
+                    <UserHeader />
+                    {/**O feed na pagina /conta nao recebe home ou userName */}
+                    <Head title='Minha conta' />
+                </>
             }
             {
                 modalPhoto && <PhotoModal photo={modalPhoto} setModalPhoto={setModalPhoto} />
