@@ -3,7 +3,7 @@ import LoginTemplate from '../../../components/LoginTemplate';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
-import useForm from '../../../hooks/UseForm';
+import useForm from '../../../Hooks/useForm';
 import API from '../../../API';
 import { Error } from '../../../components/Input/styles';
 import Head from '../../../utils/Head';

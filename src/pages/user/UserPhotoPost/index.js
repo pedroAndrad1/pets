@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { PostContainer, Preview } from './styles';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
-import useForm from '../../../hooks/UseForm'
+import useForm from '../../../Hooks/useForm'
 import { UserContext } from '../../../UserContext';
 import Error from '../../../utils/Error';
 import UserHeader from '../../../components/UserHeader';

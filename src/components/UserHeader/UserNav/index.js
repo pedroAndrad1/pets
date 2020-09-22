@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { MobileNavButton } from './styles';
-import useMedia from '../../../hooks/useMedia';
+import useMedia from '../../../Hooks/useMedia';
 import NavMobile from './NavMobile';
 import Nav from './Nav';
 

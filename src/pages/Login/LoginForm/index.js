@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
-import useForm from '../../../hooks/UseForm';
+import useForm from '../../../Hooks/useForm';
 import { UserContext } from '../../../UserContext';
 import { useHistory } from 'react-router-dom';
 import { PerdeuSenha, SubTitle, Cadastro } from './styles';
