@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Title from '../../../components/Title';
 import Input from '../../../components/Input';
-import useForm from '../../../hooks/useForm';
+import useForm from '../../../hooks/useForm/index.js';
 import Button from '../../../components/Button';
 import { UserContext } from '../../../UserContext';
 import Error from '../../../utils/Error';
