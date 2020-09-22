@@ -45,7 +45,6 @@ export const UserStorage = ({ children }) => {
             setLoading(true);
             setAutoLoginIsHappening(true);
 
-            console.log('comecou o autoLogin')
             if (token) {
 
                 //setError(null);

@@ -30,7 +30,6 @@ const LoginForm = () => {
 
             const erro = await userLogin(userName.value, password.value);
 
-            console.log(erro)
             setError(erro)
 
         }

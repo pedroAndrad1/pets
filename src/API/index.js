@@ -132,8 +132,7 @@ const PHOTO_GET = async id => {
         .then(async res => {
 
             const json = await res.json();
-            console.log(json);
-
+        
             if (res.ok) {
                 return json;
             } else {
@@ -158,7 +157,7 @@ const COMMENT_POST = async (id, comment) => {
         .then(async res => {
 
             const json = await res.json();
-            // console.log(json);
+            // 
 
             if (res.ok) {
                 return json;
@@ -221,7 +220,7 @@ const PASSWORD_RESET = async (login, key, password) => {
     })
     .then(async res => {
         const json = await res.json();
-        console.log(json);
+        
         
         if(res.ok){
             return json;
@@ -242,7 +241,7 @@ const STATS_GET = async () => {
     })
     .then(async res => {
         const json = await res.json();
-        console.log(json);
+        
         
         if(res.ok){
             return json;
