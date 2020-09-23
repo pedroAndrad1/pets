@@ -15,7 +15,7 @@ export const Modal = styled.div`
 
   @media (max-width: 64rem ){
     /** O calc e pq o scroll entra na conta */
-    padding: 2rem calc(2rem + 15px) 2rem 2rem;
+    padding: 2.5rem 2.5rem 2.5rem 2.5rem;
     position: fixed;
     width: 100vw;
     height: 100vh;

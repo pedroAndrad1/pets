@@ -40,7 +40,7 @@ export const ModalContainer = styled.div`
     height: auto;
     max-height: calc(100vh - 4rem);
     overflow-y: auto;
-    grid-template-columns: minmax(20rem, 40rem);
+    grid-template-columns: minmax(10rem, 40rem);
   }
 
 `
