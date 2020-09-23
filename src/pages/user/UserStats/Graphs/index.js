@@ -49,7 +49,7 @@ const Graphs = ({ data }) => {
                 :
                 <GraphsSection className='animeLeft'>
                     <Acessos>Total de acessos: {acessos}</Acessos>
-                    <Graph>
+                    <Graph >
                         <VictoryPie
                             data={graphContent}
                             innerRadius={50} //Para ter um circulo interno
@@ -75,6 +75,7 @@ const Graphs = ({ data }) => {
                                 alignment="start"
                                 data={graphContent}
                                 animate
+                                s
                             />
                         </VictoryChart>
                     </Graph>

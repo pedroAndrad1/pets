@@ -65,9 +65,13 @@ img {
 
 /*Para poder alinhas o conteudo dos graphs ao centro. Um graph e um svg que tem, entre outras, essa prop, 
   que inicialmente tem o height: 100%
-
-  O !important e pra ter certeza que vai sobrescrever a prop
 */
 .VictoryContainer {
+  /* O !important e pra ter certeza que vai sobrescrever a prop */
+
+  /*Para poder alinhas o conteudo dos graphs ao centro. Um graph e um svg que tem, entre outras, essa prop, 
+    que inicialmente tem o height: 100%*/
   height: initial !important;
+  /*Para ser possivel scrollar no mobile tocando no grafico */
+  touch-action: auto !important;
 }
