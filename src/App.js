@@ -9,6 +9,7 @@ import userRouting from './pages/user/userRouting';
 import Photo from './pages/Photo';
 import UserProfile from './pages/user/UserProfile';
 import Page404 from './pages/Page404';
+import ScrollToTop from './utils/ScrollTop';
 
 
 const App = () => {
@@ -18,10 +19,11 @@ const App = () => {
             <BrowserRouter>
                 <UserStorage>
                     <PageRoot>
+                        <ScrollToTop />
                         <Switch>
                             <Route path="/" exact component={Home} />
                             <Route path="/login" component={LoginRouting} />
-                            <RouteConta path='/conta' component={userRouting}/>
+                            <RouteConta path='/conta' component={userRouting} />
                             <Route path='/foto/:id' component={Photo} />
                             <Route path='/perfil/:userName' component={UserProfile} />
                             <Route path='*' component={Page404} />
