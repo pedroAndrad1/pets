@@ -1,6 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import bg from '../../assets/login.jpg';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import bgLogin from '../../assets/login.jpg';
+import bgCadastro from '../../assets/hulk_deitado.jpg';
+import bgPerdiSenha from '../../assets/ovelha_dormindo.jpg';
 
 const LoginContainer = styled.section`
     display: grid;
@@ -11,8 +14,13 @@ const LoginContainer = styled.section`
     &:before{
         content: '';
         display: block;
-        background: url(${bg}) no-repeat center center ;
-        background-size: cover;
+        ${({ backGround }) => {
+            return backGround && css`
+                            background: url(${backGround}) no-repeat center center;
+                            background-size: cover;
+                    `
+         }
+        }
     }
 
     @media(max-width: 40rem ) {
@@ -36,9 +44,34 @@ const FormContainer = styled.div`
 `
 
 const LoginTemplate = ({ children }) => {
+
+    const [background, setBackground] = useState(null);
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+
+        switch (pathname) {
+            case '/login':
+                setBackground(bgLogin);
+                break;
+            case '/login/cadastro':
+                setBackground(bgCadastro);
+                break;
+            case '/login/recuperar-senha':
+                setBackground(bgPerdiSenha);
+                break;
+            default:
+                setBackground(bgLogin);
+
+        }
+
+    }, [pathname])
+
+
+
     return (
 
-        <LoginContainer>
+        <LoginContainer backGround={background}>
             {/**Pseudo-element Before */}
             <FormContainer>
                 {children}
